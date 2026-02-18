@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>terrymurray.com — Wireframes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           DESIGN TOKENS — DaVinci Parchment Theme
+           ============================================ */
+        :root {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #EDE7D9;
+            --bg-card: #FAF7F2;
+            --bg-page: #FDFCF9;
+            --text-primary: #3E2F1C;
+            --text-secondary: #6B5B4A;
+            --text-muted: #9A8B78;
+            --accent: #8B4513;
+            --accent-hover: #A0522D;
+            --border: #D4C9B8;
+            --border-light: #E5DDD0;
+            --tag-bg: #E8DFD0;
+            --tag-text: #5C4A35;
+            --shadow-soft: 0 2px 12px rgba(62, 47, 28, 0.06);
+            --shadow-card: 0 1px 8px rgba(62, 47, 28, 0.08);
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Lora', serif;
+            --font-meta: 'Source Sans 3', sans-serif;
+            --radius: 4px;
+            --max-width: 720px;
+            --max-width-wide: 900px;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+        a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           WIREFRAME DOCUMENT STYLES
+           ============================================ */
+        .wireframe-doc {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .wireframe-doc-header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        .wireframe-doc-header h1 {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .wireframe-doc-header p {
+            font-family: var(--font-meta);
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .wireframe-section {
+            margin-bottom: 80px;
+        }
+
+        .wireframe-section-title {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .wireframe-section-desc {
+            font-family: var(--font-meta);
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+
+        .wireframe-label {
+            display: inline-block;
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            background: var(--tag-bg);
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-bottom: 16px;
+        }
+
+        /* ============================================
+           WIREFRAME FRAMES — Desktop & Mobile
+           ============================================ */
+        .wireframe-pair {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .wireframe-frame {
+            background: var(--bg-page);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .wireframe-frame.desktop {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .wireframe-frame.mobile {
+            width: 360px;
+            flex-shrink: 0;
+        }
+
+        .wireframe-frame-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .wireframe-frame-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .wireframe-frame-url {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: 12px;
+        }
+
+        .wireframe-frame-content {
+            padding: 0;
+        }
+
+        /* ============================================
+           SITE HEADER
+           ============================================ */
+        .site-header {
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .site-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.3px;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 20px;
+            font-family: var(--font-meta);
+            font-size: 14px;
+        }
+
+        .site-nav a {
+            color: var(--text-secondary);
+        }
+
+        /* mobile header */
+        .mobile .site-header {
+            padding: 14px 16px;
+        }
+
+        .mobile .site-title {
+            font-size: 18px;
+        }
+
+        .mobile .site-nav {
+            gap: 14px;
+            font-size: 13px;
+        }
+
+        /* ============================================
+           BIO SECTION
+           ============================================ */
+        .bio-section {
+            padding: 48px 32px 40px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .bio-name {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .bio-text {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .bio-text p {
+            margin-bottom: 12px;
+        }
+
+        .bio-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .bio-tagline {
+            font-family: var(--font-body);
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-top: 16px;
+        }
+
+        .mobile .bio-section {
+            padding: 28px 16px 24px;
+        }
+
+        .mobile .bio-name {
+            font-size: 28px;
+        }
+
+        .mobile .bio-text {
+            font-size: 15px;
+        }
+
+        /* ============================================
+           FILTER BAR
+           ============================================ */
+        .filter-bar {
+            padding: 16px 32px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .filter-toggles {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 3px;
+        }
+
+        .filter-toggle {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 5px 14px;
+            border-radius: 3px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            transition: all 0.15s ease;
+        }
+
+        .filter-toggle.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: 0 1px 3px rgba(62, 47, 28, 0.1);
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .tag-pill {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.15s ease;
+        }
+
+        .tag-pill:hover {
+            border-color: var(--border);
+        }
+
+        .tag-pill.active {
+            background: var(--accent);
+            color: #FFF;
+        }
+
+        .search-input {
+            margin-left: auto;
+            font-family: var(--font-meta);
+            font-size: 13px;
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            width: 200px;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent);
+        }
+
+        .mobile .filter-bar {
+            padding: 12px 16px;
+            gap: 8px;
+        }
+
+        .mobile .search-input {
+            width: 100%;
+            margin-left: 0;
+            order: -1;
+        }
+
+        /* ============================================
+           FEED — Post Cards
+           ============================================ */
+        .feed {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 24px 32px;
+        }
+
+        .feed-item {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .feed-item:last-child {
+            border-bottom: none;
+        }
+
+        .feed-item-type {
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+
+        .feed-item-type.log {
+            color: var(--text-muted);
+        }
+
+        .feed-item-type.essay {
+            color: var(--accent);
+        }
+
+        .feed-item-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .feed-item-title a {
+            color: inherit;
+        }
+
+        .feed-item-title a:hover {
+            color: var(--accent);
+        }
+
+        .feed-item-meta {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feed-item-domain {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .feed-item-meta .separator {
+            color: var(--border);
+        }
+
+        .feed-item-notes {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .feed-item-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .feed-item-readmore {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .mobile .feed {
+            padding: 16px;
+        }
+
+        .mobile .feed-item {
+            padding: 18px 0;
+        }
+
+        .mobile .feed-item-title {
+            font-size: 19px;
+        }
+
+        /* ============================================
+           FULL ESSAY PAGE
+           ============================================ */
+        .essay-page {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 48px 32px;
+        }
+
+        .essay-back {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            display: inline-block;
+        }
+
+        .essay-header {
+            margin-bottom: 32px;
+        }
+
+        .essay-header h1 {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .essay-header-meta {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .essay-body {
+            font-family: var(--font-body);
+            font-size: 17px;
+            line-height: 1.85;
+            color: var(--text-primary);
+        }
+
+        .essay-body p {
+            margin-bottom: 20px;
+        }
+
+        .essay-body h2 {
+            font-family: var(--font-heading);
+            font-size: 26px;
+            font-weight: 600;
+            margin: 40px 0 16px;
+            color: var(--text-primary);
+        }
+
+        .essay-body blockquote {
+            border-left: 3px solid var(--border);
+            padding-left: 20px;
+            margin: 24px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .essay-body img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            margin: 24px 0;
+        }
+
+        .essay-tags {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .mobile .essay-page {
+            padding: 24px 16px;
+        }
+
+        .mobile .essay-header h1 {
+            font-size: 28px;
+        }
+
+        .mobile .essay-body {
+            font-size: 16px;
+        }
+
+        /* ============================================
+           ADMIN DASHBOARD
+           ============================================ */
+        .admin-page {
+            max-width: var(--max-width-wide);
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .admin-header h1 {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .btn {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #FFF;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .admin-tab {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 10px 20px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border: none;
+            background: none;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .admin-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .admin-post-list {
+            list-style: none;
+        }
+
+        .admin-post-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .admin-post-info {
+            flex: 1;
+        }
+
+        .admin-post-title {
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 3px;
+        }
+
+        .admin-post-meta {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .admin-post-status {
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .admin-post-status.draft {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .admin-post-status.published {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .admin-post-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .admin-action-btn {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 3px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        /* ============================================
+           ESSAY EDITOR
+           ============================================ */
+        .editor-page {
+            max-width: var(--max-width-wide);
+            margin: 0 auto;
+            padding: 32px;
+        }
+
+        .editor-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .editor-topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .editor-save-status {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .editor-topbar-right {
+            display: flex;
+            gap: 8px;
+        }
+
+        .editor-title-input {
+            font-family: var(--font-heading);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            border: none;
+            background: transparent;
+            outline: none;
+            width: 100%;
+            padding: 0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .editor-title-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 2px;
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: var(--radius) var(--radius) 0 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .editor-toolbar-btn {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            padding: 4px 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .editor-toolbar-btn:hover {
+            background: var(--bg-card);
+        }
+
+        .editor-toolbar-btn.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .editor-toolbar-divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border);
+            margin: 0 6px;
+        }
+
+        .editor-toolbar-toggle {
+            margin-left: auto;
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 3px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .editor-body {
+            border: 1px solid var(--border);
+            border-radius: 0 0 var(--radius) var(--radius);
+            padding: 24px;
+            min-height: 400px;
+            background: var(--bg-card);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-primary);
+        }
+
+        .editor-body .placeholder {
+            color: var(--text-muted);
+        }
+
+        .editor-footer {
+            margin-top: 20px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .editor-tag-input-wrapper {
+            flex: 1;
+        }
+
+        .editor-tag-label {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .editor-tag-input-area {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            align-items: center;
+        }
+
+        .editor-tag-input {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            border: none;
+            background: transparent;
+            outline: none;
+            color: var(--text-primary);
+            min-width: 120px;
+            flex: 1;
+        }
+
+        .editor-tag-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .tag-pill-removable {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .tag-pill-removable .remove {
+            font-size: 14px;
+            line-height: 1;
+            cursor: pointer;
+            opacity: 0.6;
+        }
+
+        .tag-pill-removable .remove:hover {
+            opacity: 1;
+        }
+
+        /* ============================================
+           SHARE TARGET (Mobile PWA)
+           ============================================ */
+        .share-page {
+            padding: 24px 16px;
+        }
+
+        .share-page h1 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .share-form-group {
+            margin-bottom: 18px;
+        }
+
+        .share-form-label {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .share-form-input {
+            font-family: var(--font-meta);
+            font-size: 15px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            width: 100%;
+            outline: none;
+        }
+
+        .share-form-input:focus {
+            border-color: var(--accent);
+        }
+
+        .share-form-textarea {
+            font-family: var(--font-body);
+            font-size: 15px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            width: 100%;
+            outline: none;
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .share-form-textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .share-url-display {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            word-break: break-all;
+            border: 1px solid var(--border-light);
+        }
+
+        .share-save-btn {
+            width: 100%;
+            font-family: var(--font-meta);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 14px;
+            border-radius: var(--radius);
+            border: none;
+            background: var(--accent);
+            color: #FFF;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .share-success {
+            text-align: center;
+            padding: 48px 16px;
+        }
+
+        .share-success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .share-success h2 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .share-success p {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .site-footer {
+            padding: 20px 32px;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .mobile .site-footer {
+            padding: 16px;
+        }
+
+        /* ============================================
+           UTILITIES
+           ============================================ */
+        .text-muted { color: var(--text-muted); }
+        .mt-1 { margin-top: 4px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-4 { margin-top: 16px; }
+        .mb-2 { margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-doc">
+
+    <!-- ============================================
+         DOCUMENT HEADER
+         ============================================ -->
+    <div class="wireframe-doc-header">
+        <h1>terrymurray.com</h1>
+        <p>Wireframes — DaVinci Parchment Theme &nbsp;·&nbsp; All screens shown at desktop and mobile scale</p>
+    </div>
+
+    <!-- ============================================
+         1. HOME PAGE — Desktop
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">1. Home Page</h2>
+        <p class="wireframe-section-desc">Landing page with bio, filter controls, and unified feed of reading log entries and essays. Default view shows all posts reverse-chronological.</p>
+
+        <span class="wireframe-label">Desktop</span>
+        <div class="wireframe-frame desktop" style="margin-bottom: 32px;">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">terrymurray.com</span>
+            </div>
+            <div class="wireframe-frame-content">
+                <!-- Header -->
+                <div class="site-header">
+                    <div class="site-title">Terry Murray</div>
+                    <nav class="site-nav">
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                    </nav>
+                </div>
+
+                <!-- Bio -->
+                <div class="bio-section">
+                    <h1 class="bio-name">Terry Murray</h1>
+                    <div class="bio-text">
+                        <p>Senior Director of AI at Verafin (Nasdaq). I've been building with large language models since ChatGPT launched in November 2022, and I haven't shut up about them since.</p>
+                        <p>This is where I share what I'm reading, watching, and thinking about in the AI space. I consume a lot of content — articles, whitepapers, videos — and I log it all here with my notes. Sometimes I write longer pieces when an idea won't leave me alone.</p>
+                    </div>
+                    <p class="bio-tagline">If you work with me, this is the answer to "what should I be reading?"</p>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="filter-bar">
+                    <div class="filter-toggles">
+                        <button class="filter-toggle active">All</button>
+                        <button class="filter-toggle">Reading Log</button>
+                        <button class="filter-toggle">Essays</button>
+                    </div>
+                    <div class="filter-tags">
+                        <span class="tag-pill">agents</span>
+                        <span class="tag-pill active">vibe coding</span>
+                        <span class="tag-pill">interpretability</span>
+                        <span class="tag-pill">benchmarks</span>
+                        <span class="tag-pill">regulation</span>
+                    </div>
+                    <input type="text" class="search-input" placeholder="Search posts...">
+                </div>
+
+                <!-- Feed -->
+                <div class="feed">
+                    <!-- Essay Entry -->
+                    <div class="feed-item">
+                        <div class="feed-item-type essay">Essay</div>
+                        <h3 class="feed-item-title"><a href="#">Why Vibe Coding Will Eat Spec-Driven Development</a></h3>
+                        <div class="feed-item-meta">
+                            <span>February 14, 2026</span>
+                            <span class="separator">·</span>
+                            <span>6 min read</span>
+                        </div>
+                        <p class="feed-item-notes">The gap between "describe what you want" and "get working software" is collapsing faster than anyone predicted. Here's why I think spec-driven development is already on borrowed time, and what that means for teams like ours...</p>
+                        <div class="feed-item-tags">
+                            <span class="tag-pill">vibe coding</span>
+                            <span class="tag-pill">software development</span>
+                        </div>
+                        <a href="#" class="feed-item-readmore">Read more →</a>
+                    </div>
+
+                    <!-- Log Entry -->
+                    <div class="feed-item">
+                        <div class="feed-item-type log">Reading Log</div>
+                        <h3 class="feed-item-title"><a href="#">Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</a></h3>
+                        <div class="feed-item-meta">
+                            <a href="#" class="feed-item-domain">anthropic.com ↗</a>
+                            <span class="separator">·</span>
+                            <span>February 12, 2026</span>
+                        </div>
+                        <p class="feed-item-notes">This is huge for interpretability. The golden gate bridge experiment alone is worth the read. Makes me wonder what this means for compliance/audit use cases in financial crime — if you can prove what the model is "looking at" when it flags a transaction, that changes the regulatory conversation entirely.</p>
+                        <div class="feed-item-tags">
+                            <span class="tag-pill">interpretability</span>
+                            <span class="tag-pill">anthropic</span>
+                        </div>
+                    </div>
+
+                    <!-- Log Entry (no notes) -->
+                    <div class="feed-item">
+                        <div class="feed-item-type log">Reading Log</div>
+                        <h3 class="feed-item-title"><a href="#">The AI-Powered Developer Workflow: From Copilot to Autopilot</a></h3>
+                        <div class="feed-item-meta">
+                            <a href="#" class="feed-item-domain">youtube.com ↗</a>
+                            <span class="separator">·</span>
+                            <span>February 11, 2026</span>
+                        </div>
+                        <div class="feed-item-tags">
+                            <span class="tag-pill">vibe coding</span>
+                            <span class="tag-pill">developer tools</span>
+                        </div>
+                    </div>
+
+                    <!-- Log Entry -->
+                    <div class="feed-item">
+                        <div class="feed-item-type log">Reading Log</div>
+                        <h3 class="feed-item-title"><a href="#">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</a></h3>
+                        <div class="feed-item-meta">
+                            <a href="#" class="feed-item-domain">arxiv.org ↗</a>
+                            <span class="separator">·</span>
+                            <span>February 10, 2026</span>
+                        </div>
+                        <p class="feed-item-notes">Important paper. The pure RL approach to reasoning without supervised fine-tuning is compelling. Worth comparing against Anthropic's approach. Need to dig deeper into the training methodology.</p>
+                        <div class="feed-item-tags">
+                            <span class="tag-pill">benchmarks</span>
+                            <span class="tag-pill">reasoning</span>
+                            <span class="tag-pill">deepseek</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="site-footer">
+                    © 2026 Terry Murray
+                </div>
+            </div>
+        </div>
+
+        <span class="wireframe-label">Mobile (360px)</span>
+        <div class="wireframe-frame mobile">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">terrymurray.com</span>
+            </div>
+            <div class="wireframe-frame-content mobile">
+                <div class="site-header">
+                    <div class="site-title">Terry Murray</div>
+                    <nav class="site-nav">
+                        <a href="#">Home</a>
+                    </nav>
+                </div>
+
+                <div class="bio-section">
+                    <h1 class="bio-name">Terry Murray</h1>
+                    <div class="bio-text">
+                        <p>Senior Director of AI at Verafin (Nasdaq). I've been building with large language models since ChatGPT launched in November 2022, and I haven't shut up about them since.</p>
+                        <p>This is where I share what I'm reading, watching, and thinking about in the AI space.</p>
+                    </div>
+                    <p class="bio-tagline">If you work with me, this is the answer to "what should I be reading?"</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" class="search-input" placeholder="Search posts...">
+                    <div class="filter-toggles">
+                        <button class="filter-toggle active">All</button>
+                        <button class="filter-toggle">Log</button>
+                        <button class="filter-toggle">Essays</button>
+                    </div>
+                    <div class="filter-tags">
+                        <span class="tag-pill">agents</span>
+                        <span class="tag-pill active">vibe coding</span>
+                        <span class="tag-pill">interpretability</span>
+                    </div>
+                </div>
+
+                <div class="feed">
+                    <div class="feed-item">
+                        <div class="feed-item-type essay">Essay</div>
+                        <h3 class="feed-item-title"><a href="#">Why Vibe Coding Will Eat Spec-Driven Development</a></h3>
+                        <div class="feed-item-meta">
+                            <span>Feb 14, 2026</span>
+                            <span class="separator">·</span>
+                            <span>6 min read</span>
+                        </div>
+                        <p class="feed-item-notes">The gap between "describe what you want" and "get working software" is collapsing faster than anyone predicted...</p>
+                        <div class="feed-item-tags">
+                            <span class="tag-pill">vibe coding</span>
+                        </div>
+                        <a href="#" class="feed-item-readmore">Read more →</a>
+                    </div>
+
+                    <div class="feed-item">
+                        <div class="feed-item-type log">Reading Log</div>
+                        <h3 class="feed-item-title"><a href="#">Scaling Monosemanticity</a></h3>
+                        <div class="feed-item-meta">
+                            <a href="#" class="feed-item-domain">anthropic.com ↗</a>
+                            <span class="separator">·</span>
+                            <span>Feb 12, 2026</span>
+                        </div>
+                        <p class="feed-item-notes">This is huge for interpretability. The golden gate bridge experiment alone is worth the read...</p>
+                        <div class="feed-item-tags">
+                            <span class="tag-pill">interpretability</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="site-footer">
+                    © 2026 Terry Murray
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         2. FULL ESSAY PAGE
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">2. Full Essay Page</h2>
+        <p class="wireframe-section-desc">Standalone page for reading a full essay. Clean, readable, focused on the content.</p>
+
+        <span class="wireframe-label">Desktop</span>
+        <div class="wireframe-frame desktop" style="margin-bottom: 32px;">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">terrymurray.com/post/vibe-coding-will-eat-spec-driven</span>
+            </div>
+            <div class="wireframe-frame-content">
+                <div class="site-header">
+                    <div class="site-title">Terry Murray</div>
+                    <nav class="site-nav">
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                    </nav>
+                </div>
+
+                <div class="essay-page">
+                    <a href="#" class="essay-back">← Back to feed</a>
+
+                    <div class="essay-header">
+                        <h1>Why Vibe Coding Will Eat Spec-Driven Development</h1>
+                        <div class="essay-header-meta">
+                            <span>February 14, 2026</span>
+                            <span class="separator" style="color: var(--border);">·</span>
+                            <span>6 min read</span>
+                        </div>
+                    </div>
+
+                    <div class="essay-body">
+                        <p>I've been watching something happen across our engineering teams that I think most people in leadership aren't paying attention to. The developers who ship the fastest aren't the ones writing the most detailed specs. They're the ones who've figured out how to think alongside an LLM.</p>
+
+                        <h2>The Spec Is a Crutch</h2>
+
+                        <p>For decades, we've treated the specification document as the single source of truth. And for good reason — when you're coordinating 20 developers across three time zones, you need a shared understanding of what's being built. But here's the thing: the spec was never the goal. The spec was a <em>compression artifact</em> — a lossy encoding of what someone actually wanted.</p>
+
+                        <p>What if you could just... describe what you wanted, and get working software?</p>
+
+                        <blockquote>
+                            <p>"The best code is the code you never had to write a spec for." — someone who's about to be proven right</p>
+                        </blockquote>
+
+                        <p>I've been running an experiment with two teams at Verafin. One follows our standard spec-driven workflow. The other uses what I'm calling "vibe coding" — iterative, conversational development with an LLM, guided by intent rather than specification. The results after six weeks are hard to ignore.</p>
+
+                        <p>The vibe coding team ships 3x faster and has comparable defect rates. The spec team produces more documentation. That's about it.</p>
+
+                        <h2>What This Means for Our Industry</h2>
+
+                        <p>I'm not saying specs are dead tomorrow. But I am saying that the ratio of "time spent specifying" to "time spent building" is about to invert. And teams that don't adapt will find themselves writing beautiful documents that describe software their competitors shipped last month.</p>
+                    </div>
+
+                    <div class="essay-tags">
+                        <span class="tag-pill">vibe coding</span>
+                        <span class="tag-pill">software development</span>
+                        <span class="tag-pill">leadership</span>
+                    </div>
+                </div>
+
+                <div class="site-footer">
+                    © 2026 Terry Murray
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         3. ADMIN DASHBOARD
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">3. Admin Dashboard</h2>
+        <p class="wireframe-section-desc">Post management interface. Only visible when logged in. Lists all posts with status, edit/delete controls.</p>
+
+        <span class="wireframe-label">Desktop</span>
+        <div class="wireframe-frame desktop" style="margin-bottom: 32px;">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">terrymurray.com/admin</span>
+            </div>
+            <div class="wireframe-frame-content">
+                <div class="site-header">
+                    <div class="site-title">Terry Murray</div>
+                    <nav class="site-nav">
+                        <a href="#">Home</a>
+                        <a href="#">Admin</a>
+                        <a href="#" style="color: var(--text-muted);">Sign Out</a>
+                    </nav>
+                </div>
+
+                <div class="admin-page">
+                    <div class="admin-header">
+                        <h1>Dashboard</h1>
+                        <button class="btn btn-primary">+ New Essay</button>
+                    </div>
+
+                    <div class="admin-tabs">
+                        <button class="admin-tab active">All Posts</button>
+                        <button class="admin-tab">Drafts</button>
+                        <button class="admin-tab">Reading Log</button>
+                        <button class="admin-tab">Essays</button>
+                    </div>
+
+                    <ul class="admin-post-list">
+                        <li class="admin-post-item">
+                            <div class="admin-post-info">
+                                <div class="admin-post-title">Why Vibe Coding Will Eat Spec-Driven Development</div>
+                                <div class="admin-post-meta">
+                                    <span class="admin-post-status published">Published</span>
+                                    <span>Essay</span>
+                                    <span>·</span>
+                                    <span>Feb 14, 2026</span>
+                                    <span>·</span>
+                                    <span>vibe coding, software development</span>
+                                </div>
+                            </div>
+                            <div class="admin-post-actions">
+                                <button class="admin-action-btn">Edit</button>
+                                <button class="admin-action-btn">Delete</button>
+                            </div>
+                        </li>
+                        <li class="admin-post-item">
+                            <div class="admin-post-info">
+                                <div class="admin-post-title">The Coming Compliance Singularity</div>
+                                <div class="admin-post-meta">
+                                    <span class="admin-post-status draft">Draft</span>
+                                    <span>Essay</span>
+                                    <span>·</span>
+                                    <span>Feb 13, 2026</span>
+                                    <span>·</span>
+                                    <span>regulation, financial crime</span>
+                                </div>
+                            </div>
+                            <div class="admin-post-actions">
+                                <button class="admin-action-btn">Edit</button>
+                                <button class="admin-action-btn">Delete</button>
+                            </div>
+                        </li>
+                        <li class="admin-post-item">
+                            <div class="admin-post-info">
+                                <div class="admin-post-title">Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</div>
+                                <div class="admin-post-meta">
+                                    <span class="admin-post-status published">Published</span>
+                                    <span>Log · anthropic.com</span>
+                                    <span>·</span>
+                                    <span>Feb 12, 2026</span>
+                                    <span>·</span>
+                                    <span>interpretability, anthropic</span>
+                                </div>
+                            </div>
+                            <div class="admin-post-actions">
+                                <button class="admin-action-btn">Edit</button>
+                                <button class="admin-action-btn">Delete</button>
+                            </div>
+                        </li>
+                        <li class="admin-post-item">
+                            <div class="admin-post-info">
+                                <div class="admin-post-title">The AI-Powered Developer Workflow: From Copilot to Autopilot</div>
+                                <div class="admin-post-meta">
+                                    <span class="admin-post-status published">Published</span>
+                                    <span>Log · youtube.com</span>
+                                    <span>·</span>
+                                    <span>Feb 11, 2026</span>
+                                    <span>·</span>
+                                    <span>vibe coding, developer tools</span>
+                                </div>
+                            </div>
+                            <div class="admin-post-actions">
+                                <button class="admin-action-btn">Edit</button>
+                                <button class="admin-action-btn">Delete</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="site-footer">
+                    © 2026 Terry Murray
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         4. ESSAY EDITOR
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">4. Essay Editor</h2>
+        <p class="wireframe-section-desc">TipTap WYSIWYG editor with toolbar, markdown toggle, tag input with autocomplete, and auto-save indicator. Draft/Publish controls in top bar.</p>
+
+        <span class="wireframe-label">Desktop</span>
+        <div class="wireframe-frame desktop" style="margin-bottom: 32px;">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">terrymurray.com/admin/write</span>
+            </div>
+            <div class="wireframe-frame-content">
+                <div class="site-header">
+                    <div class="site-title">Terry Murray</div>
+                    <nav class="site-nav">
+                        <a href="#">← Dashboard</a>
+                        <a href="#" style="color: var(--text-muted);">Sign Out</a>
+                    </nav>
+                </div>
+
+                <div class="editor-page">
+                    <div class="editor-topbar">
+                        <div class="editor-topbar-left">
+                            <span class="admin-post-status draft">Draft</span>
+                            <span class="editor-save-status">Saved 2 seconds ago</span>
+                        </div>
+                        <div class="editor-topbar-right">
+                            <button class="btn btn-secondary">Preview</button>
+                            <button class="btn btn-primary">Publish</button>
+                        </div>
+                    </div>
+
+                    <input type="text" class="editor-title-input" placeholder="Essay title..." value="The Coming Compliance Singularity">
+
+                    <div class="editor-toolbar">
+                        <button class="editor-toolbar-btn"><b>B</b></button>
+                        <button class="editor-toolbar-btn"><i>I</i></button>
+                        <button class="editor-toolbar-btn"><s>S</s></button>
+                        <div class="editor-toolbar-divider"></div>
+                        <button class="editor-toolbar-btn">H1</button>
+                        <button class="editor-toolbar-btn">H2</button>
+                        <button class="editor-toolbar-btn">H3</button>
+                        <div class="editor-toolbar-divider"></div>
+                        <button class="editor-toolbar-btn">• List</button>
+                        <button class="editor-toolbar-btn">1. List</button>
+                        <button class="editor-toolbar-btn">" Quote</button>
+                        <div class="editor-toolbar-divider"></div>
+                        <button class="editor-toolbar-btn">🔗 Link</button>
+                        <button class="editor-toolbar-btn">🖼 Image</button>
+                        <button class="editor-toolbar-btn">{ } Code</button>
+                        <button class="editor-toolbar-btn">— Rule</button>
+                        <button class="editor-toolbar-toggle">⟨/⟩ Markdown</button>
+                    </div>
+
+                    <div class="editor-body">
+                        <p>There's a moment coming — probably sooner than most compliance officers think — where AI-driven transaction monitoring will be so accurate and so fast that the current regulatory framework simply won't be able to keep up.</p>
+                        <p>I've been thinking about this since our team started experimenting with multi-agent architectures for alert triage. The early results are...</p>
+                        <p class="placeholder" style="margin-top: 120px;">Keep writing...</p>
+                    </div>
+
+                    <div class="editor-footer">
+                        <div class="editor-tag-input-wrapper">
+                            <div class="editor-tag-label">Tags</div>
+                            <div class="editor-tag-input-area">
+                                <span class="tag-pill-removable">regulation <span class="remove">×</span></span>
+                                <span class="tag-pill-removable">financial crime <span class="remove">×</span></span>
+                                <input type="text" class="editor-tag-input" placeholder="Add tag...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="site-footer">
+                    © 2026 Terry Murray
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         5. PWA SHARE TARGET (Mobile Only)
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">5. PWA Share Target</h2>
+        <p class="wireframe-section-desc">The share target form that opens when you share a URL from any Android app. Minimal, fast, designed for one-handed use. Shows URL, pre-filled title, optional notes and tags, and a big save button.</p>
+
+        <div style="display: flex; gap: 32px;">
+            <div>
+                <span class="wireframe-label">Share Form</span>
+                <div class="wireframe-frame mobile">
+                    <div class="wireframe-frame-bar">
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <span class="wireframe-frame-url">terrymurray.com/share</span>
+                    </div>
+                    <div class="wireframe-frame-content mobile">
+                        <div class="site-header">
+                            <div class="site-title">Terry Murray</div>
+                        </div>
+
+                        <div class="share-page">
+                            <h1>Log Content</h1>
+
+                            <div class="share-form-group">
+                                <label class="share-form-label">URL</label>
+                                <div class="share-url-display">https://arxiv.org/abs/2501.12948</div>
+                            </div>
+
+                            <div class="share-form-group">
+                                <label class="share-form-label">Title</label>
+                                <input type="text" class="share-form-input" value="DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning">
+                            </div>
+
+                            <div class="share-form-group">
+                                <label class="share-form-label">Notes (optional)</label>
+                                <textarea class="share-form-textarea" placeholder="Quick thoughts on this content...">Important paper. The pure RL approach to reasoning without supervised fine-tuning is compelling.</textarea>
+                            </div>
+
+                            <div class="share-form-group">
+                                <label class="share-form-label">Tags (optional)</label>
+                                <div class="editor-tag-input-area">
+                                    <span class="tag-pill-removable">reasoning <span class="remove">×</span></span>
+                                    <span class="tag-pill-removable">deepseek <span class="remove">×</span></span>
+                                    <input type="text" class="editor-tag-input" placeholder="Add tag...">
+                                </div>
+                            </div>
+
+                            <button class="share-save-btn">Save to Reading Log</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <span class="wireframe-label">Success State</span>
+                <div class="wireframe-frame mobile">
+                    <div class="wireframe-frame-bar">
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <span class="wireframe-frame-url">terrymurray.com/share</span>
+                    </div>
+                    <div class="wireframe-frame-content mobile">
+                        <div class="site-header">
+                            <div class="site-title">Terry Murray</div>
+                        </div>
+
+                        <div class="share-success">
+                            <div class="share-success-icon">✓</div>
+                            <h2>Saved</h2>
+                            <p>Added to your reading log</p>
+                            <p style="margin-top: 16px;"><a href="#">View on site →</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         6. DESIGN SYSTEM REFERENCE
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">6. Design System Reference</h2>
+        <p class="wireframe-section-desc">Color palette, typography, and component styles for the DaVinci parchment theme.</p>
+
+        <div class="wireframe-frame desktop">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">Design Tokens</span>
+            </div>
+            <div class="wireframe-frame-content" style="padding: 32px;">
+
+                <!-- Colors -->
+                <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 16px;">Colors</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px;">
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #F5F0E8; border: 1px solid var(--border); border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">bg-primary<br>#F5F0E8</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #EDE7D9; border: 1px solid var(--border); border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">bg-secondary<br>#EDE7D9</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #FAF7F2; border: 1px solid var(--border); border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">bg-card<br>#FAF7F2</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #3E2F1C; border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">text-primary<br>#3E2F1C</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #6B5B4A; border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">text-secondary<br>#6B5B4A</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #9A8B78; border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">text-muted<br>#9A8B78</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #8B4513; border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">accent<br>#8B4513</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #D4C9B8; border: 1px solid var(--border); border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">border<br>#D4C9B8</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 80px; height: 60px; background: #E8DFD0; border: 1px solid var(--border); border-radius: 4px;"></div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); margin-top: 4px;">tag-bg<br>#E8DFD0</div>
+                    </div>
+                </div>
+
+                <!-- Typography -->
+                <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 16px;">Typography</h3>
+                <div style="margin-bottom: 32px;">
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Headings — Cormorant Garamond</div>
+                        <div style="font-family: var(--font-heading); font-size: 36px; font-weight: 700; line-height: 1.2;">The Renaissance of AI Thinking</div>
+                        <div style="font-family: var(--font-heading); font-size: 26px; font-weight: 600; margin-top: 8px;">Section Heading</div>
+                        <div style="font-family: var(--font-heading); font-size: 22px; font-weight: 600; margin-top: 8px;">Feed Item Title</div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Body — Lora</div>
+                        <div style="font-family: var(--font-body); font-size: 17px; line-height: 1.85; max-width: 600px;">This is body text set in Lora. It has excellent readability at the sizes used for essay content and reading log notes. The serif letterforms complement the parchment aesthetic.</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Meta / UI — Source Sans 3</div>
+                        <div style="font-family: var(--font-meta); font-size: 14px; color: var(--text-secondary);">February 14, 2026 · 6 min read · anthropic.com</div>
+                        <div style="font-family: var(--font-meta); font-size: 13px; margin-top: 4px;">
+                            <span class="tag-pill">interpretability</span>
+                            <span class="tag-pill">agents</span>
+                            <span class="tag-pill">vibe coding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Components -->
+                <h3 style="font-family: var(--font-heading); font-size: 22px; margin-bottom: 16px;">Components</h3>
+                <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+                    <div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Buttons</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-primary">Publish</button>
+                            <button class="btn btn-secondary">Preview</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Filter Toggles</div>
+                        <div class="filter-toggles">
+                            <button class="filter-toggle active">All</button>
+                            <button class="filter-toggle">Reading Log</button>
+                            <button class="filter-toggle">Essays</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Tags</div>
+                        <div style="display: flex; gap: 6px;">
+                            <span class="tag-pill">default</span>
+                            <span class="tag-pill active">active</span>
+                            <span class="tag-pill-removable">removable <span class="remove">×</span></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Status Badges</div>
+                        <div style="display: flex; gap: 8px;">
+                            <span class="admin-post-status published">Published</span>
+                            <span class="admin-post-status draft">Draft</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-meta); font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Type Labels</div>
+                        <div style="display: flex; gap: 12px;">
+                            <span class="feed-item-type essay">Essay</span>
+                            <span class="feed-item-type log">Reading Log</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
