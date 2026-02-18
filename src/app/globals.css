@@ -86,3 +86,85 @@ a:hover {
   color: var(--accent-hover);
   text-decoration: underline;
 }
+
+/* ─── Essay prose styles ─────────────────────────────────────── */
+.essay-body {
+  font-family: var(--font-lora), 'Lora', serif;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--text-primary);
+}
+
+.essay-body p {
+  margin-bottom: 20px;
+}
+
+.essay-body h2 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin: 40px 0 16px;
+  color: var(--text-primary);
+}
+
+.essay-body h3 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 32px 0 12px;
+  color: var(--text-primary);
+}
+
+.essay-body blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 20px;
+  margin: 24px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.essay-body img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 24px 0;
+}
+
+.essay-body ul,
+.essay-body ol {
+  padding-left: 1.5em;
+  margin-bottom: 20px;
+}
+
+.essay-body li {
+  margin-bottom: 4px;
+}
+
+.essay-body pre {
+  background: var(--bg-secondary);
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 24px 0;
+}
+
+.essay-body code {
+  background: var(--bg-secondary);
+  padding: 0.125em 0.25em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.essay-body a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.essay-body a:hover {
+  color: var(--accent-hover);
+}
+
+@media (max-width: 640px) {
+  .essay-body {
+    font-size: 16px;
+  }
+}

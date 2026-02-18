@@ -49,18 +49,18 @@
 
 **Goal**: Database schema is migrated; Prisma client is available; full-text search trigger is installed.
 
-- [ ] 3.1 Write `prisma/schema.prisma`
+- [x] 3.1 Write `prisma/schema.prisma`
   - Copy the full schema from the TDD: `User`, `Post`, `Tag`, `PostTag`, `Image` models
   - Include enums `PostType` (LOG, ESSAY) and `PostStatus` (PUBLISHED, DRAFT)
   - Add `searchVector` field to `Post` as `Unsupported("tsvector")?`
-- [ ] 3.2 Run `npx prisma migrate dev --name init` to create the initial migration
-- [ ] 3.3 Add full-text search setup to the migration SQL (edit the generated migration file before applying, or run raw SQL)
+- [x] 3.2 Run `npx prisma migrate dev --name init` to create the initial migration
+- [x] 3.3 Add full-text search setup to the migration SQL (edit the generated migration file before applying, or run raw SQL)
   - `ALTER TABLE posts ADD COLUMN search_vector tsvector`
   - Create the `posts_search_update()` trigger function
   - Create `posts_search_trigger` (BEFORE INSERT OR UPDATE)
   - Create `posts_search_idx` GIN index
-- [ ] 3.4 Create `src/lib/prisma.ts` — Prisma client singleton (safe for Next.js hot reload)
-- [ ] 3.5 Create `src/lib/utils.ts`
+- [x] 3.4 Create `src/lib/prisma.ts` — Prisma client singleton (safe for Next.js hot reload)
+- [x] 3.5 Create `src/lib/utils.ts`
   - `extractDomain(url: string): string` — strips protocol/path, returns bare hostname
   - `stripHtml(html: string): string` — used for search indexing
 
@@ -70,21 +70,21 @@
 
 **Goal**: Google OAuth login works; only Terry's email can sign in; admin routes are protected.
 
-- [ ] 4.1 Create `src/app/api/auth/[...nextauth]/route.ts`
+- [x] 4.1 Create `src/app/api/auth/[...nextauth]/route.ts`
   - Configure `GoogleProvider`
   - Add `signIn` callback that checks `user.email === process.env.ALLOWED_EMAIL`
   - Use JWT strategy (no database sessions)
-- [ ] 4.2 Create `src/lib/auth.ts`
+- [x] 4.2 Create `src/lib/auth.ts`
   - Export `authOptions` (reused across the app)
   - Export `getServerSession` helper
-- [ ] 4.3 Create `src/middleware.ts`
+- [x] 4.3 Create `src/middleware.ts`
   - Protect `/admin/:path*` and all `/api/posts` mutation routes (POST, PUT, DELETE)
   - Protect `/api/upload` and `/api/share`
   - Redirect unauthenticated users to `/login`
-- [ ] 4.4 Create `src/app/login/page.tsx`
+- [x] 4.4 Create `src/app/login/page.tsx`
   - Simple centered card: site title, "Sign in with Google" button
   - Use `signIn('google')` from `next-auth/react`
-- [ ] 4.5 Update `Header.tsx` to show "Admin" link when session exists, "Sign In" otherwise
+- [x] 4.5 Update `Header.tsx` to show "Admin" link when session exists, "Sign In" otherwise
 
 ---
 
@@ -92,26 +92,26 @@
 
 **Goal**: All CRUD endpoints work; can be tested with curl or a REST client.
 
-- [ ] 5.1 `GET /api/posts` — `src/app/api/posts/route.ts`
+- [x] 5.1 `GET /api/posts` — `src/app/api/posts/route.ts`
   - Query params: `type` (LOG | ESSAY | all), `tag`, `search`, `page` (default 1), `limit` (default 20)
   - Return only `PUBLISHED` posts
   - Use PostgreSQL full-text search when `search` param is present
   - Include tags in response
-- [ ] 5.2 `POST /api/posts` — same file, auth-gated
+- [x] 5.2 `POST /api/posts` — same file, auth-gated
   - Accept: `type`, `title`, `url`, `content`, `contentMarkdown`, `status`, `tags[]`
   - Auto-extract `domain` from `url` using `extractDomain` util
   - Create or connect tags by name (upsert)
   - Return created post
-- [ ] 5.3 `GET /api/posts/[id]` — `src/app/api/posts/[id]/route.ts`
+- [x] 5.3 `GET /api/posts/[id]` — `src/app/api/posts/[id]/route.ts`
   - Return single post with tags; 404 if not found or DRAFT (unless admin)
-- [ ] 5.4 `PUT /api/posts/[id]` — same file, auth-gated
+- [x] 5.4 `PUT /api/posts/[id]` — same file, auth-gated
   - Accept partial update fields
   - Re-sync tags (delete removed, add new)
-- [ ] 5.5 `DELETE /api/posts/[id]` — same file, auth-gated
+- [x] 5.5 `DELETE /api/posts/[id]` — same file, auth-gated
   - Hard delete post (PostTag cascade handled by Prisma schema)
-- [ ] 5.6 `GET /api/tags` — `src/app/api/tags/route.ts`
+- [x] 5.6 `GET /api/tags` — `src/app/api/tags/route.ts`
   - Return all tags with post count (published posts only)
-- [ ] 5.7 `GET /api/tags/autocomplete?q=` — `src/app/api/tags/autocomplete/route.ts`
+- [x] 5.7 `GET /api/tags/autocomplete?q=` — `src/app/api/tags/autocomplete/route.ts`
   - Return tags whose `name` starts with query string, limit 10
 
 ---
@@ -120,27 +120,27 @@
 
 **Goal**: The public home page renders bio + paginated feed with working filters.
 
-- [ ] 6.1 Create `src/components/ui/TagPill.tsx`
+- [x] 6.1 Create `src/components/ui/TagPill.tsx`
   - Small pill: `--tag-bg` background, `--tag-text` text, `Source Sans 3` font
   - Optional `onClick` prop for filter behavior
-- [ ] 6.2 Create `src/components/ui/SearchInput.tsx`
+- [x] 6.2 Create `src/components/ui/SearchInput.tsx`
   - Text input styled to theme; emits debounced `onChange`
-- [ ] 6.3 Create `src/components/ui/Button.tsx`
+- [x] 6.3 Create `src/components/ui/Button.tsx`
   - Reusable button with `primary` and `ghost` variants using theme colors
-- [ ] 6.4 Create `src/components/feed/LogEntry.tsx`
+- [x ] 6.4 Create `src/components/feed/LogEntry.tsx`
   - Shows: title (linked to external URL), domain badge, date, notes (if any), tags
   - Domain badge is a small muted pill (e.g. "arxiv.org")
-- [ ] 6.5 Create `src/components/feed/EssayEntry.tsx`
+- [x] 6.5 Create `src/components/feed/EssayEntry.tsx`
   - Shows: title (linked to `/post/[id]`), date, first ~150 chars of content (strip HTML), "Read more →", tags
-- [ ] 6.6 Create `src/components/feed/FilterBar.tsx`
+- [x] 6.6 Create `src/components/feed/FilterBar.tsx`
   - Type toggle: "All" | "Reading Log" | "Essays" (mutually exclusive button group)
   - Tag filter: chips from available tags, click to toggle
   - Search: `SearchInput` component
-- [ ] 6.7 Create `src/components/feed/PostFeed.tsx`
+- [x] 6.7 Create `src/components/feed/PostFeed.tsx`
   - Client component; calls `GET /api/posts` with current filter state
   - Renders `LogEntry` or `EssayEntry` based on `post.type`
   - "Load More" button for pagination
-- [ ] 6.8 Create `src/app/page.tsx` — Home page
+- [x] 6.8 Create `src/app/page.tsx` — Home page
   - Bio section (hardcoded content, styled with `Cormorant Garamond` heading)
   - Renders `<FilterBar>` and `<PostFeed>`
 
