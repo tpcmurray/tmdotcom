@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum PostType {
+  LOG
+  ESSAY
+}
+
+enum PostStatus {
+  PUBLISHED
+  DRAFT
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  image     String?
+  posts     Post[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Post {
+  id              String                   @id @default(uuid())
+  type            PostType
+  title           String
+  url             String?
+  domain          String?
+  content         String?                  @db.Text
+  contentMarkdown String?                  @db.Text @map("content_markdown")
+  status          PostStatus               @default(PUBLISHED)
+  authorId        String                   @map("author_id")
+  author          User                     @relation(fields: [authorId], references: [id])
+  tags            PostTag[]
+  images          Image[]
+  searchVector    Unsupported("tsvector")? @map("search_vector")
+  createdAt       DateTime                 @default(now()) @map("created_at")
+  updatedAt       DateTime                 @updatedAt @map("updated_at")
+
+  @@map("posts")
+}
+
+model Tag {
+  id        String    @id @default(uuid())
+  name      String    @unique
+  posts     PostTag[]
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("tags")
+}
+
+model PostTag {
+  postId String @map("post_id")
+  tagId  String @map("tag_id")
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([postId, tagId])
+  @@map("post_tags")
+}
+
+model Image {
+  id        String   @id @default(uuid())
+  postId    String?  @map("post_id")
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: SetNull)
+  filename  String
+  path      String
+  mimeType  String   @map("mime_type")
+  sizeBytes Int      @map("size_bytes")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("images")
+}
