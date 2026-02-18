@@ -9,17 +9,17 @@
 
 **Goal**: Bare Next.js app compiles and runs locally with the correct tooling installed.
 
-- [ ] 1.1 Bootstrap Next.js app with TypeScript and App Router
+- [x] 1.1 Bootstrap Next.js app with TypeScript and App Router
   - `npx create-next-app@latest terrymurray --typescript --app --tailwind --eslint --src-dir`
-- [ ] 1.2 Install core dependencies
+- [x] 1.2 Install core dependencies
   - `prisma`, `@prisma/client`, `next-auth`, `@auth/prisma-adapter`
   - `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/extension-image`, `@tiptap/extension-link`, `@tiptap/extension-placeholder`, `@tiptap/extension-typography`
   - `next-pwa`
   - `uuid`, `@types/uuid`
-- [ ] 1.3 Set up `.env.local` with all required environment variables (use placeholder values locally)
+- [x] 1.3 Set up `.env.local` with all required environment variables (use placeholder values locally)
   - `DATABASE_URL`, `NEXTAUTH_URL`, `NEXTAUTH_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `ALLOWED_EMAIL`, `UPLOAD_DIR`
-- [ ] 1.4 Create `uploads/images/` directory at project root; add to `.gitignore`
-- [ ] 1.5 Verify `npm run dev` starts cleanly
+- [x] 1.4 Create `uploads/images/` directory at project root; add to `.gitignore`
+- [x] 1.5 Verify `npm run dev` starts cleanly
 
 ---
 
@@ -27,26 +27,21 @@
 
 **Goal**: DaVinci Parchment theme applied globally; typography loaded; base layout shell renders.
 
-- [ ] 2.1 Add Google Fonts to `app/layout.tsx`
+- [x] 2.1 Add Google Fonts to `app/layout.tsx`
   - `Cormorant Garamond` (weights 400, 600, 700)
   - `Lora` (weights 400, 700)
   - `Source Sans 3` (weights 400, 600)
-- [ ] 2.2 Write `src/styles/globals.css`
-  - Paste in all CSS custom properties (`--bg-primary`, `--text-primary`, `--accent`, etc.)
-  - Apply base body styles: `background: var(--bg-primary)`, `color: var(--text-primary)`, `font-family: var(--font-body)`
-  - Add subtle paper-grain texture to `body` (CSS `background-image` noise filter or reference `public/textures/paper-grain.png`)
-- [ ] 2.3 Configure `tailwind.config.ts`
-  - Extend theme to map Tailwind classes to CSS variables (e.g. `colors.accent`, `colors.bg-card`)
-  - Register the three font families
-- [ ] 2.4 Create `src/components/layout/Header.tsx`
-  - Site title in `Cormorant Garamond`
-  - Minimal nav (home link)
-  - Placeholder "Admin" link (hidden until auth wired up)
-- [ ] 2.5 Create `src/components/layout/Footer.tsx`
-  - Minimal: copyright line
-- [ ] 2.6 Create `src/app/layout.tsx` root layout
-  - Wraps all pages with `<Header>` and `<Footer>`
-  - Applies global styles and fonts
+- [x] 2.2 Write `src/app/globals.css` (Tailwind v4 CSS-first — no tailwind.config.ts)
+  - All CSS custom properties (`--bg-primary`, `--text-primary`, `--accent`, etc.)
+  - `@theme inline` block maps vars to Tailwind utilities (`bg-parchment`, `text-ink`, `text-brown`, `font-heading`, etc.)
+  - Base body styles + paper-grain texture overlay via `body::after` (gracefully absent without PNG)
+- [x] 2.3 ~~Configure `tailwind.config.ts`~~ — **N/A**: project uses Tailwind v4 (CSS-based config, no JS file)
+- [x] 2.4 Create `src/components/layout/Header.tsx`
+  - Site title in `Cormorant Garamond`, minimal nav, placeholder Admin link
+- [x] 2.5 Create `src/components/layout/Footer.tsx`
+  - Copyright line, themed to match parchment palette
+- [x] 2.6 Create `src/app/layout.tsx` root layout
+  - Injects all three font CSS vars onto `<html>`, wraps pages with `<Header>` + `<Footer>`
 
 ---
 

@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
+/* ─── DaVinci Parchment — Raw design tokens ──────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-primary:    #F5F0E8;
+  --bg-secondary:  #EDE7D9;
+  --bg-card:       #FAF7F2;
+  --text-primary:  #3E2F1C;
+  --text-secondary:#6B5B4A;
+  --text-muted:    #9A8B78;
+  --accent:        #8B4513;
+  --accent-hover:  #A0522D;
+  --border:        #D4C9B8;
+  --tag-bg:        #E8DFD0;
+  --tag-text:      #5C4A35;
 }
 
+/* ─── Tailwind v4 theme mapping ──────────────────────────────── */
+/*
+ * --font-cormorant, --font-lora, --font-source-sans are injected
+ * onto <html> by next/font/google in layout.tsx.
+ *
+ * Color naming convention (generates bg-*, text-*, border-* utilities):
+ *   parchment       → --bg-primary
+ *   parchment-deep  → --bg-secondary
+ *   card            → --bg-card
+ *   ink             → --text-primary
+ *   ink-soft        → --text-secondary
+ *   ink-muted       → --text-muted
+ *   brown / brown-light → accent colours
+ *   edge            → border colour
+ *   chip / chip-ink → tag pill colours
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-parchment:      var(--bg-primary);
+  --color-parchment-deep: var(--bg-secondary);
+  --color-card:           var(--bg-card);
+  --color-ink:            var(--text-primary);
+  --color-ink-soft:       var(--text-secondary);
+  --color-ink-muted:      var(--text-muted);
+  --color-brown:          var(--accent);
+  --color-brown-light:    var(--accent-hover);
+  --color-edge:           var(--border);
+  --color-chip:           var(--tag-bg);
+  --color-chip-ink:       var(--tag-text);
+
+  --font-heading: var(--font-cormorant), 'Cormorant Garamond', serif;
+  --font-body:    var(--font-lora), 'Lora', serif;
+  --font-meta:    var(--font-source-sans), 'Source Sans 3', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ─── Base styles ────────────────────────────────────────────── */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-lora), 'Lora', serif;
+  min-height: 100vh;
+}
+
+/* Subtle paper grain texture overlay.
+   Drop a 256×256 tileable noise PNG at public/textures/paper-grain.png.
+   Without the image the site still looks correct — just without the texture. */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('/textures/paper-grain.png');
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ─── Typography ─────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
 }
