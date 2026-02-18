@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getAuthSession } from "@/lib/auth";
 
-export default function Header() {
+export default async function Header() {
+  const session = await getAuthSession();
+
   return (
     <header className="border-b border-edge bg-parchment-deep">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4 sm:px-6">
@@ -15,10 +18,15 @@ export default function Header() {
           <Link href="/" className="hover:text-brown">
             Home
           </Link>
-          {/* Admin link — wired up in Phase 4 once auth is in place */}
-          <Link href="/admin" className="hover:text-brown">
-            Admin
-          </Link>
+          {session ? (
+            <Link href="/admin" className="hover:text-brown">
+              Admin
+            </Link>
+          ) : (
+            <Link href="/login" className="hover:text-brown">
+              Sign In
+            </Link>
+          )}
         </nav>
       </div>
     </header>
