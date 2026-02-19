@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import Button from "@/components/ui/Button";
@@ -16,7 +17,7 @@ export default async function AdminDashboardPage({
   const { filter } = await searchParams;
   const activeFilter = filter || "all";
 
-  const where: Record<string, unknown> = {};
+  const where: Prisma.PostWhereInput = {};
   if (activeFilter === "drafts") where.status = "DRAFT";
   if (activeFilter === "log") where.type = "LOG";
   if (activeFilter === "essays") where.type = "ESSAY";
