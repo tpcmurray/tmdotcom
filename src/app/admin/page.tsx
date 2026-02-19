@@ -16,19 +16,17 @@ export default async function AdminDashboardPage({
   const { filter } = await searchParams;
   const activeFilter = filter || "all";
 
-  const where =
-    activeFilter === "drafts" ? { status: "DRAFT" as const }
-    : activeFilter === "log" ? { type: "LOG" as const }
-    : activeFilter === "essays" ? { type: "ESSAY" as const }
-    : {};
-
   const posts = await prisma.post.findMany({
-    where,
+    where:
+      activeFilter === "drafts" ? { status: "DRAFT" }
+      : activeFilter === "log" ? { type: "LOG" }
+      : activeFilter === "essays" ? { type: "ESSAY" }
+      : {},
     include: { tags: { include: { tag: true } } },
     orderBy: { createdAt: "desc" },
   });
 
-  const serializedPosts = posts.map((post) => ({
+  const serializedPosts = posts.map((post: typeof posts[number]) => ({
     id: post.id,
     title: post.title,
     type: post.type,
