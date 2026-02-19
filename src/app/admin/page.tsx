@@ -33,7 +33,7 @@ export default async function AdminDashboardPage({
     status: post.status,
     domain: post.domain,
     createdAt: post.createdAt.toISOString(),
-    tags: post.tags.map((pt) => pt.tag.name),
+    tags: post.tags.map((pt: (typeof post.tags)[number]) => pt.tag.name),
   }));
 
   return (
