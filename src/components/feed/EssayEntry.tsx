@@ -25,9 +25,9 @@ export default function EssayEntry({ post }: EssayEntryProps) {
   const text = excerpt(post.content);
 
   return (
-    <article className="pb-6 mb-6 border-b border-edge/50 last:border-b-0 last:pb-0 last:mb-0">
+    <article className="bg-card rounded-lg px-5 py-5 mb-6 shadow-[0_2px_12px_rgba(62,47,28,0.06)] border border-edge-light/60">
       {/* Type label */}
-      <p className="font-meta text-[11px] font-semibold uppercase tracking-[0.8px] text-brown mb-1.5">
+      <p className="font-meta text-[12px] font-bold uppercase tracking-[1px] text-brown mb-2">
         Essay
       </p>
 
