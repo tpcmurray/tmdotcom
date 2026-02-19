@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { PostStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import { stripHtml } from "@/lib/utils";
@@ -26,7 +25,7 @@ async function getPost(id: string) {
 
   if (!post) return null;
 
-  if (post.status === PostStatus.DRAFT) {
+  if (post.status === "DRAFT") {
     const session = await getAuthSession();
     if (!session) return null;
   }

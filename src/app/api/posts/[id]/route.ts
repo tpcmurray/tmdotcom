@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PostStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import { extractDomain } from "@/lib/utils";
@@ -27,7 +26,7 @@ export async function GET(
     }
 
     // Drafts are only visible to the authenticated user
-    if (post.status === PostStatus.DRAFT) {
+    if (post.status === "DRAFT") {
       const session = await getAuthSession();
       if (!session) {
         return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -98,7 +97,7 @@ export async function PUT(
     if (content !== undefined) updateData.content = content ?? null;
     if (contentMarkdown !== undefined)
       updateData.contentMarkdown = contentMarkdown ?? null;
-    if (status !== undefined) updateData.status = status as PostStatus;
+    if (status !== undefined) updateData.status = status;
 
     const updatedPost = await prisma.post.update({
       where: { id },

@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PostType, PostStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import { extractDomain } from "@/lib/utils";
@@ -26,11 +25,11 @@ export async function GET(req: NextRequest) {
     const skip = (page - 1) * limit;
 
     const where: Record<string, unknown> = {
-      status: PostStatus.PUBLISHED,
+      status: "PUBLISHED",
     };
 
     if (type && type.toUpperCase() !== "ALL") {
-      where.type = type.toUpperCase() as PostType;
+      where.type = type.toUpperCase();
     }
 
     if (tag) {
@@ -150,13 +149,13 @@ export async function POST(req: NextRequest) {
 
     const post = await prisma.post.create({
       data: {
-        type: type as PostType,
+        type: type,
         title,
         url: url ?? null,
         domain: url ? extractDomain(url) : null,
         content: content ?? null,
         contentMarkdown: contentMarkdown ?? null,
-        status: (status as PostStatus) ?? PostStatus.PUBLISHED,
+        status: status ?? "PUBLISHED",
         authorId: user.id,
         tags: {
           create: tagRecords.map((tag) => ({ tagId: tag.id })),
