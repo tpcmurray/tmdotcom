@@ -204,6 +204,8 @@ export default function EditorPage({ initialData }: EditorPageProps) {
         status={status}
         saveState={saveState}
         lastSaved={lastSaved}
+        isDirty={isDirty}
+        onSave={save}
         onPublish={handlePublish}
         onUnpublish={handleUnpublish}
         onPreview={handlePreview}

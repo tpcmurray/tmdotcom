@@ -6,6 +6,8 @@ interface SaveBarProps {
   status: "DRAFT" | "PUBLISHED";
   saveState: "idle" | "saving" | "saved" | "error";
   lastSaved: Date | null;
+  isDirty: boolean;
+  onSave: () => void;
   onPublish: () => void;
   onUnpublish: () => void;
   onPreview: () => void;
@@ -25,6 +27,8 @@ export default function SaveBar({
   status,
   saveState,
   lastSaved,
+  isDirty,
+  onSave,
   onPublish,
   onUnpublish,
   onPreview,
@@ -56,6 +60,14 @@ export default function SaveBar({
       </div>
 
       <div className="flex gap-2">
+        <Button
+          variant="ghost"
+          onClick={onSave}
+          disabled={!isDirty || saveState === "saving"}
+          className="text-[13px] px-3 py-1.5"
+        >
+          Save
+        </Button>
         <Button
           variant="ghost"
           onClick={onPreview}
