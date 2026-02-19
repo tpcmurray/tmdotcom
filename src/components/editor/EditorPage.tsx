@@ -47,6 +47,7 @@ export default function EditorPage({ initialData }: EditorPageProps) {
   const statusRef = useRef(status);
   const postIdRef = useRef(postId);
   const isDirtyRef = useRef(isDirty);
+  const markdownRef = useRef<string | null>(initialData?.contentMarkdown ?? null);
 
   titleRef.current = title;
   contentRef.current = content;
@@ -68,7 +69,7 @@ export default function EditorPage({ initialData }: EditorPageProps) {
           type: "ESSAY" as const,
           title: currentTitle,
           content: contentRef.current,
-          contentMarkdown: null,
+          contentMarkdown: markdownRef.current,
           status: saveStatus,
           tags: tagsRef.current,
         };
@@ -147,6 +148,17 @@ export default function EditorPage({ initialData }: EditorPageProps) {
     [saveState]
   );
 
+  const handleMarkdownUpdate = useCallback(
+    (md: string) => {
+      contentRef.current = content; // keep HTML in sync via ref
+      // Store markdown for saving
+      markdownRef.current = md;
+      setIsDirty(true);
+      if (saveState === "saved") setSaveState("idle");
+    },
+    [saveState, content]
+  );
+
   const handleTagsChange = useCallback(
     (newTags: string[]) => {
       setTags(newTags);
@@ -209,6 +221,7 @@ export default function EditorPage({ initialData }: EditorPageProps) {
       <TipTapEditor
         content={content}
         onUpdate={handleContentUpdate}
+        onMarkdownUpdate={handleMarkdownUpdate}
         onImageUpload={handleImageUpload}
       />
 

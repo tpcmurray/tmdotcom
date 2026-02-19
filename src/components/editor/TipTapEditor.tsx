@@ -6,11 +6,22 @@ import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import Typography from "@tiptap/extension-typography";
-import { useCallback, useEffect } from "react";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+import { common, createLowlight } from "lowlight";
+import { Markdown } from "tiptap-markdown";
+import { useCallback, useEffect, useState } from "react";
+
+const lowlight = createLowlight(common);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getMarkdownFromEditor(editor: any): string {
+  return editor.storage.markdown.getMarkdown();
+}
 
 interface TipTapEditorProps {
   content: string;
   onUpdate: (html: string) => void;
+  onMarkdownUpdate?: (md: string) => void;
   onImageUpload?: (file: File) => Promise<string>;
 }
 
@@ -41,12 +52,22 @@ function ToolbarDivider() {
 export default function TipTapEditor({
   content,
   onUpdate,
+  onMarkdownUpdate,
   onImageUpload,
 }: TipTapEditorProps) {
+  const [showMarkdown, setShowMarkdown] = useState(false);
+  const [markdownSource, setMarkdownSource] = useState("");
+
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit.configure({
         heading: { levels: [1, 2, 3] },
+        codeBlock: false, // replaced by CodeBlockLowlight
+      }),
+      CodeBlockLowlight.configure({
+        lowlight,
+        defaultLanguage: "plaintext",
       }),
       Image,
       Link.configure({
@@ -57,10 +78,18 @@ export default function TipTapEditor({
         placeholder: "Start writing...",
       }),
       Typography,
+      Markdown.configure({
+        html: true,
+        transformPastedText: false,
+        transformCopiedText: false,
+      }),
     ],
     content,
     onUpdate: ({ editor: e }) => {
       onUpdate(e.getHTML());
+      if (onMarkdownUpdate) {
+        onMarkdownUpdate(getMarkdownFromEditor(e));
+      }
     },
     editorProps: {
       handleDrop: (view, event, _slice, moved) => {
@@ -159,6 +188,23 @@ export default function TipTapEditor({
     }
   }, [editor, onImageUpload]);
 
+  const toggleMarkdown = useCallback(() => {
+    if (!editor) return;
+    if (!showMarkdown) {
+      // Switching to markdown view
+      setMarkdownSource(getMarkdownFromEditor(editor));
+      setShowMarkdown(true);
+    } else {
+      // Switching back to WYSIWYG — apply markdown edits
+      editor.commands.setContent(markdownSource);
+      onUpdate(editor.getHTML());
+      if (onMarkdownUpdate) {
+        onMarkdownUpdate(markdownSource);
+      }
+      setShowMarkdown(false);
+    }
+  }, [editor, showMarkdown, markdownSource, onUpdate, onMarkdownUpdate]);
+
   if (!editor) return null;
 
   return (
@@ -248,11 +294,26 @@ export default function TipTapEditor({
         >
           &mdash; Rule
         </ToolbarButton>
+
+        <ToolbarDivider />
+
+        <ToolbarButton onClick={toggleMarkdown} active={showMarkdown}>
+          {showMarkdown ? "WYSIWYG" : "Markdown"}
+        </ToolbarButton>
       </div>
 
-      <div className="editor-body">
-        <EditorContent editor={editor} />
-      </div>
+      {showMarkdown ? (
+        <textarea
+          value={markdownSource}
+          onChange={(e) => setMarkdownSource(e.target.value)}
+          className="editor-markdown-textarea"
+          spellCheck={false}
+        />
+      ) : (
+        <div className="editor-body">
+          <EditorContent editor={editor} />
+        </div>
+      )}
     </div>
   );
 }

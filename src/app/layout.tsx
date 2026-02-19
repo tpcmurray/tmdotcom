@@ -38,7 +38,16 @@ export default function RootLayout({
       lang="en"
       className={`${cormorant.variable} ${lora.variable} ${sourceSans.variable}`}
     >
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#8B4513" />
+      </head>
       <body className="flex min-h-screen flex-col">
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}`,
+          }}
+        />
         <Header />
         <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6">
           {children}

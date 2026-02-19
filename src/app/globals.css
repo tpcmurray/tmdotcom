@@ -313,6 +313,70 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Syntax highlighting for code blocks (lowlight) */
+.editor-body .tiptap pre code .hljs-comment,
+.editor-body .tiptap pre code .hljs-quote,
+.essay-body pre code .hljs-comment,
+.essay-body pre code .hljs-quote {
+  color: var(--text-muted);
+  font-style: italic;
+}
+.editor-body .tiptap pre code .hljs-keyword,
+.editor-body .tiptap pre code .hljs-selector-tag,
+.editor-body .tiptap pre code .hljs-built_in,
+.essay-body pre code .hljs-keyword,
+.essay-body pre code .hljs-selector-tag,
+.essay-body pre code .hljs-built_in {
+  color: #8B4513;
+  font-weight: 600;
+}
+.editor-body .tiptap pre code .hljs-string,
+.editor-body .tiptap pre code .hljs-attr,
+.essay-body pre code .hljs-string,
+.essay-body pre code .hljs-attr {
+  color: #6B8E23;
+}
+.editor-body .tiptap pre code .hljs-number,
+.editor-body .tiptap pre code .hljs-literal,
+.essay-body pre code .hljs-number,
+.essay-body pre code .hljs-literal {
+  color: #B8860B;
+}
+.editor-body .tiptap pre code .hljs-title,
+.editor-body .tiptap pre code .hljs-section,
+.essay-body pre code .hljs-title,
+.essay-body pre code .hljs-section {
+  color: #A0522D;
+}
+.editor-body .tiptap pre code .hljs-type,
+.editor-body .tiptap pre code .hljs-class .hljs-title,
+.essay-body pre code .hljs-type,
+.essay-body pre code .hljs-class .hljs-title {
+  color: #8B6914;
+}
+
+/* Markdown textarea */
+.editor-markdown-textarea {
+  display: block;
+  box-sizing: border-box;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0 0 4px 4px;
+  padding: 24px;
+  min-height: 400px;
+  width: 100%;
+  resize: vertical;
+  outline: none;
+  tab-size: 2;
+}
+.editor-markdown-textarea:focus {
+  border-color: var(--accent);
+}
+
 .editor-body .tiptap p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   color: var(--text-muted);
@@ -341,4 +405,108 @@ a:hover {
 .status-badge.published {
   background: #D1FAE5;
   color: #065F46;
+}
+
+/* ─── Share form styles ─────────────────────────────────────── */
+.share-url-display {
+  font-family: var(--font-source-sans), 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  word-break: break-all;
+}
+
+.share-form-group {
+  margin-bottom: 20px;
+}
+
+.share-form-label {
+  font-family: var(--font-source-sans), 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.share-form-input {
+  font-family: var(--font-lora), 'Lora', serif;
+  font-size: 16px;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 14px;
+  width: 100%;
+  outline: none;
+}
+
+.share-form-input:focus {
+  border-color: var(--accent);
+}
+
+.share-form-textarea {
+  font-family: var(--font-lora), 'Lora', serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px 14px;
+  width: 100%;
+  resize: vertical;
+  outline: none;
+}
+
+.share-form-textarea:focus {
+  border-color: var(--accent);
+}
+
+.share-success {
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.share-success-icon {
+  font-size: 48px;
+  color: #065F46;
+  margin-bottom: 12px;
+}
+
+.share-success-title {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.share-success-text {
+  font-family: var(--font-source-sans), 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.share-success-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.share-success-link {
+  font-family: var(--font-source-sans), 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.share-success-link:hover {
+  color: var(--accent-hover);
 }

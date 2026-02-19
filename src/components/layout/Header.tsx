@@ -19,9 +19,20 @@ export default async function Header() {
             Home
           </Link>
           {session ? (
-            <Link href="/admin" className="hover:text-brown">
-              Admin
-            </Link>
+            <>
+              <Link href="/admin" className="hover:text-brown">
+                Admin
+              </Link>
+              <Link href="/admin/write" className="hover:text-brown">
+                New Essay
+              </Link>
+              <Link
+                href="/api/auth/signout"
+                className="text-ink-muted hover:text-brown"
+              >
+                Sign Out
+              </Link>
+            </>
           ) : (
             <Link href="/login" className="hover:text-brown">
               Sign In
