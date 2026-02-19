@@ -33,7 +33,7 @@ async function getPost(id: string) {
 
   return {
     ...post,
-    tags: post.tags.map((pt) => pt.tag),
+    tags: post.tags.map((pt: (typeof post.tags)[number]) => pt.tag),
   };
 }
 

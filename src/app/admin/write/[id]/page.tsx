@@ -29,7 +29,7 @@ export default async function EditEssayPage({
         content: post.content,
         contentMarkdown: post.contentMarkdown,
         status: post.status,
-        tags: post.tags.map((pt) => pt.tag),
+        tags: post.tags.map((pt: (typeof post.tags)[number]) => pt.tag),
       }}
     />
   );
