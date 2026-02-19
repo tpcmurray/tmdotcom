@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Prisma, PostType, PostStatus } from "@prisma/client";
+import { PostType, PostStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import { extractDomain } from "@/lib/utils";
 import { sanitizeSearchTerm } from "@/lib/search";
 
-type PostWithTags = Prisma.PostGetPayload<{
-  include: { tags: { include: { tag: true } } };
-}>;
-
-function normalizePost(post: PostWithTags) {
+function normalizePost<T extends { tags: { tag: unknown }[] }>(post: T) {
   const { tags, ...rest } = post;
   return { ...rest, tags: tags.map((pt) => pt.tag) };
 }
@@ -29,7 +25,7 @@ export async function GET(req: NextRequest) {
     );
     const skip = (page - 1) * limit;
 
-    const where: Prisma.PostWhereInput = {
+    const where: Record<string, unknown> = {
       status: PostStatus.PUBLISHED,
     };
 
@@ -41,12 +37,7 @@ export async function GET(req: NextRequest) {
       where.tags = { some: { tag: { name: tag } } };
     }
 
-    let posts: PostWithTags[];
-    let total: number;
-
     if (search) {
-      // Full-text search: get matching IDs from PostgreSQL, then fetch via Prisma
-      // Prisma handles tag/type filtering on the result set
       const sanitized = sanitizeSearchTerm(search);
       const matchingIds = await prisma.$queryRaw<{ id: string }[]>`
         SELECT id FROM posts
@@ -58,7 +49,7 @@ export async function GET(req: NextRequest) {
       const ids = matchingIds.map((r) => r.id);
       const searchWhere = { ...where, id: { in: ids } };
 
-      [posts, total] = await Promise.all([
+      const [posts, total] = await Promise.all([
         prisma.post.findMany({
           where: searchWhere,
           include: { tags: { include: { tag: true } } },
@@ -68,18 +59,25 @@ export async function GET(req: NextRequest) {
         }),
         prisma.post.count({ where: searchWhere }),
       ]);
-    } else {
-      [posts, total] = await Promise.all([
-        prisma.post.findMany({
-          where,
-          include: { tags: { include: { tag: true } } },
-          orderBy: { createdAt: "desc" },
-          skip,
-          take: limit,
-        }),
-        prisma.post.count({ where }),
-      ]);
+
+      return NextResponse.json({
+        posts: posts.map(normalizePost),
+        total,
+        page,
+        limit,
+      });
     }
+
+    const [posts, total] = await Promise.all([
+      prisma.post.findMany({
+        where,
+        include: { tags: { include: { tag: true } } },
+        orderBy: { createdAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.post.count({ where }),
+    ]);
 
     return NextResponse.json({
       posts: posts.map(normalizePost),

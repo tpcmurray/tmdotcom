@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Prisma, PostStatus } from "@prisma/client";
+import { PostStatus } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import { extractDomain } from "@/lib/utils";
 
-type PostWithTags = Prisma.PostGetPayload<{
-  include: { tags: { include: { tag: true } } };
-}>;
-
-function normalizePost(post: PostWithTags) {
+function normalizePost<T extends { tags: { tag: unknown }[] }>(post: T) {
   const { tags, ...rest } = post;
   return { ...rest, tags: tags.map((pt) => pt.tag) };
 }
@@ -93,7 +89,7 @@ export async function PUT(
       }
     }
 
-    const updateData: Prisma.PostUpdateInput = {};
+    const updateData: Record<string, unknown> = {};
     if (title !== undefined) updateData.title = title;
     if (url !== undefined) {
       updateData.url = url ?? null;
@@ -104,13 +100,13 @@ export async function PUT(
       updateData.contentMarkdown = contentMarkdown ?? null;
     if (status !== undefined) updateData.status = status as PostStatus;
 
-    const post = await prisma.post.update({
+    const updatedPost = await prisma.post.update({
       where: { id },
       data: updateData,
       include: { tags: { include: { tag: true } } },
     });
 
-    return NextResponse.json(normalizePost(post));
+    return NextResponse.json(normalizePost(updatedPost));
   } catch (error) {
     console.error("PUT /api/posts/[id] error:", error);
     return NextResponse.json(
