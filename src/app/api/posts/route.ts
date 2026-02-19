@@ -6,7 +6,7 @@ import { sanitizeSearchTerm } from "@/lib/search";
 
 function normalizePost<T extends { tags: { tag: unknown }[] }>(post: T) {
   const { tags, ...rest } = post;
-  return { ...rest, tags: tags.map((pt) => pt.tag) };
+  return { ...rest, tags: tags.map((pt: { tag: unknown }) => pt.tag) };
 }
 
 // GET /api/posts
@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
         ORDER BY ts_rank(search_vector, plainto_tsquery('english', ${sanitized})) DESC
       `;
 
-      const ids = matchingIds.map((r) => r.id);
+      const ids = matchingIds.map((r: { id: string }) => r.id);
       const searchWhere = { ...where, id: { in: ids } };
 
       const [posts, total] = await Promise.all([
@@ -138,7 +138,7 @@ export async function POST(req: NextRequest) {
       : [];
 
     const tagRecords = await Promise.all(
-      tagNames.map((name) =>
+      tagNames.map((name: string) =>
         prisma.tag.upsert({
           where: { name },
           create: { name },
@@ -158,7 +158,7 @@ export async function POST(req: NextRequest) {
         status: status ?? "PUBLISHED",
         authorId: user.id,
         tags: {
-          create: tagRecords.map((tag) => ({ tagId: tag.id })),
+          create: tagRecords.map((tag: { id: string }) => ({ tagId: tag.id })),
         },
       },
       include: { tags: { include: { tag: true } } },

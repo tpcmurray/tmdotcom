@@ -17,7 +17,7 @@ export async function GET() {
     });
 
     return NextResponse.json(
-      tags.map((tag) => ({
+      tags.map((tag: (typeof tags)[number]) => ({
         id: tag.id,
         name: tag.name,
         count: tag.posts.length,

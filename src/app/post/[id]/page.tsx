@@ -90,7 +90,7 @@ export default async function PostPage({ params }: { params: Params }) {
 
       {post.tags.length > 0 && (
         <div className="mt-10 pt-5 border-t border-edge/50 flex flex-wrap gap-1.5">
-          {post.tags.map((tag) => (
+          {post.tags.map((tag: { id: string; name: string }) => (
             <TagPill key={tag.id} name={tag.name} />
           ))}
         </div>

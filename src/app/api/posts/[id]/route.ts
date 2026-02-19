@@ -5,7 +5,7 @@ import { extractDomain } from "@/lib/utils";
 
 function normalizePost<T extends { tags: { tag: unknown }[] }>(post: T) {
   const { tags, ...rest } = post;
-  return { ...rest, tags: tags.map((pt) => pt.tag) };
+  return { ...rest, tags: tags.map((pt: { tag: unknown }) => pt.tag) };
 }
 
 // GET /api/posts/[id]
@@ -70,7 +70,7 @@ export async function PUT(
         : [];
 
       const tagRecords = await Promise.all(
-        tagNames.map((name) =>
+        tagNames.map((name: string) =>
           prisma.tag.upsert({
             where: { name },
             create: { name },
@@ -83,7 +83,7 @@ export async function PUT(
 
       if (tagRecords.length > 0) {
         await prisma.postTag.createMany({
-          data: tagRecords.map((tag) => ({ postId: id, tagId: tag.id })),
+          data: tagRecords.map((tag: { id: string }) => ({ postId: id, tagId: tag.id })),
         });
       }
     }
