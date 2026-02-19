@@ -14,8 +14,10 @@ export async function POST(req: NextRequest) {
   if (sharedUrl) params.set("url", sharedUrl);
   if (sharedTitle) params.set("title", sharedTitle);
 
+  const proto = req.headers.get("x-forwarded-proto") || "https";
+  const host = req.headers.get("host") || "terrymurray.com";
   return NextResponse.redirect(
-    new URL(`/share?${params.toString()}`, req.url),
+    new URL(`/share?${params.toString()}`, `${proto}://${host}`),
   );
 }
 
