@@ -10,9 +10,9 @@ export default function HomePage() {
         </h1>
         <div className="font-body text-base text-ink-soft leading-relaxed space-y-3">
           <p>
-            Senior Director of AI at Verafin (Nasdaq). I&apos;ve been building
-            with large language models since ChatGPT launched in November 2022,
-            and I haven&apos;t shut up about them since.
+            Hi, I'm Terry. I&apos;ve been building with large language models since 
+            ChatGPT launched in November 2022, and I haven&apos;t shut up about them since.
+            So much sho that at the company I work for, I'm now Senior Director of AI in Development.
           </p>
           <p>
             This is where I share what I&apos;m reading, watching, and thinking
@@ -22,7 +22,7 @@ export default function HomePage() {
           </p>
         </div>
         <p className="font-body italic text-ink-muted text-sm mt-4">
-          If you work with me, this is the answer to &ldquo;what should I be
+          If you work with me, this might be the answer to &ldquo;what should I be
           reading?&rdquo;
         </p>
       </section>
