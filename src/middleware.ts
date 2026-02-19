@@ -2,11 +2,7 @@ import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
 
 export default withAuth(
-  function middleware(req) {
-    // API routes return 401 rather than redirecting to the login page
-    if (req.nextUrl.pathname.startsWith("/api/")) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+  function middleware() {
     return NextResponse.next();
   },
   {
