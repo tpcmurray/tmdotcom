@@ -6,6 +6,6 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(clients.claim());
 });
 
-self.addEventListener("fetch", () => {
-  // Pass through — no offline caching for v1
+self.addEventListener("fetch", (event) => {
+  event.respondWith(fetch(event.request));
 });
