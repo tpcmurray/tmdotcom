@@ -168,6 +168,7 @@ export default function EditorPage({ initialData }: EditorPageProps) {
     [saveState]
   );
 
+  const handleSave = useCallback(() => save(), [save]);
   const handlePublish = useCallback(() => save("PUBLISHED"), [save]);
   const handleUnpublish = useCallback(() => save("DRAFT"), [save]);
 
@@ -205,7 +206,7 @@ export default function EditorPage({ initialData }: EditorPageProps) {
         saveState={saveState}
         lastSaved={lastSaved}
         isDirty={isDirty}
-        onSave={save}
+        onSave={handleSave}
         onPublish={handlePublish}
         onUnpublish={handleUnpublish}
         onPreview={handlePreview}
