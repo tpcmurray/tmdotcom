@@ -107,7 +107,25 @@ export default function PostFeed() {
         )}
       </div>
 
-      {loading && (
+      {loading && posts.length === 0 && (
+        <div className="space-y-6">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="pb-6 border-b border-edge/50 animate-pulse">
+              <div className="h-3 w-20 bg-edge/40 rounded mb-2" />
+              <div className="h-5 w-3/4 bg-edge/50 rounded mb-2" />
+              <div className="h-3 w-32 bg-edge/30 rounded mb-3" />
+              <div className="h-4 w-full bg-edge/30 rounded mb-1.5" />
+              <div className="h-4 w-2/3 bg-edge/30 rounded mb-3" />
+              <div className="flex gap-1.5">
+                <div className="h-5 w-14 bg-edge/30 rounded-full" />
+                <div className="h-5 w-10 bg-edge/30 rounded-full" />
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {loading && posts.length > 0 && (
         <p className="font-meta text-sm text-ink-muted py-6 text-center">
           Loading…
         </p>

@@ -5,14 +5,17 @@
   --bg-primary:    #F5F0E8;
   --bg-secondary:  #EDE7D9;
   --bg-card:       #FAF7F2;
+  --bg-page:       #FDFCF9;
   --text-primary:  #3E2F1C;
   --text-secondary:#6B5B4A;
   --text-muted:    #9A8B78;
   --accent:        #8B4513;
   --accent-hover:  #A0522D;
   --border:        #D4C9B8;
+  --border-light:  #E5DDD0;
   --tag-bg:        #E8DFD0;
   --tag-text:      #5C4A35;
+  --shadow-soft:   0 2px 12px rgba(62, 47, 28, 0.06);
 }
 
 /* ─── Tailwind v4 theme mapping ──────────────────────────────── */
@@ -41,6 +44,7 @@
   --color-brown:          var(--accent);
   --color-brown-light:    var(--accent-hover);
   --color-edge:           var(--border);
+  --color-edge-light:     var(--border-light);
   --color-chip:           var(--tag-bg);
   --color-chip-ink:       var(--tag-text);
 
@@ -70,6 +74,24 @@ body::after {
   opacity: 0.04;
   pointer-events: none;
   z-index: 9999;
+}
+
+/* ─── Center panel — lighter card on parchment body ──────────── */
+.site-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--bg-page);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 960px) {
+  .site-panel {
+    border-left: 1px solid var(--border-light);
+    border-right: 1px solid var(--border-light);
+  }
 }
 
 /* ─── Typography ─────────────────────────────────────────────── */

@@ -42,17 +42,19 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#8B4513" />
       </head>
-      <body className="flex min-h-screen flex-col">
+      <body className="flex min-h-screen justify-center">
         <script
           dangerouslySetInnerHTML={{
             __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}`,
           }}
         />
-        <Header />
-        <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6">
-          {children}
-        </main>
-        <Footer />
+        <div className="site-panel">
+          <Header />
+          <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8 sm:px-6">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
