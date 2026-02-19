@@ -42,11 +42,13 @@ export default function EssayRenderer({ content }: EssayRendererProps) {
   if (!content) return null;
 
   return (
-    <div
-      ref={ref}
-      className="essay-body"
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
+    <>
+      <div
+        ref={ref}
+        className="essay-body"
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    </>
   );
 }
 

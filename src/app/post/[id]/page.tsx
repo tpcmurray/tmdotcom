@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
-import { stripHtml } from "@/lib/utils";
+import { stripHtml, calculateReadingTime } from "@/lib/utils";
 import EssayRenderer from "@/components/feed/EssayRenderer";
 import TagPill from "@/components/ui/TagPill";
 
@@ -83,6 +83,8 @@ export default async function PostPage({ params }: { params: Params }) {
         </h1>
         <div className="font-meta text-[14px] text-ink-muted flex items-center gap-3">
           <span>{formatDate(post.createdAt)}</span>
+          <span>·</span>
+          <span>{calculateReadingTime(post.content)} min read</span>
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import TagPill from "@/components/ui/TagPill";
-import { stripHtml } from "@/lib/utils";
+import { stripHtml, calculateReadingTime } from "@/lib/utils";
 import type { Post } from "@/components/feed/PostFeed";
 
 function formatDate(iso: string) {
@@ -41,9 +41,15 @@ export default function EssayEntry({ post }: EssayEntryProps) {
         </Link>
       </h3>
 
-      {/* Meta: date */}
+      {/* Meta: date + reading time */}
       <div className="font-meta text-[13px] text-ink-muted mb-2.5">
         {formatDate(post.createdAt)}
+        {post.type === "ESSAY" && (
+          <>
+            {" "}·{" "}
+            <span>{calculateReadingTime(post.content)} min read</span>
+          </>
+        )}
       </div>
 
       {/* Excerpt */}
