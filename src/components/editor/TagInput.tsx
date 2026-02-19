@@ -136,7 +136,7 @@ export default function TagInput({ tags, onChange }: TagInputProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={tags.length === 0 ? "Add tag..." : ""}
+            placeholder={tags.length === 0 ? "Add tag (press Enter)..." : ""}
             className="font-meta text-[13px] border-none bg-transparent outline-none text-ink min-w-[120px] flex-1 placeholder:text-ink-muted"
           />
         </div>
