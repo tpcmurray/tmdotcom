@@ -25,6 +25,5 @@ export const config = {
     "/admin/:path*",
     // Protected API routes — always require auth regardless of HTTP method
     "/api/upload",
-    "/api/share",
   ],
 };
