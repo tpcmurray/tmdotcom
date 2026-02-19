@@ -12,10 +12,10 @@ export default function HomePage() {
           <p>
             Hi, I'm Terry. I&apos;ve been building with large language models since 
             ChatGPT launched in November 2022, and I haven&apos;t shut up about them since.
-            So much sho that at the company I work for, I'm now Senior Director of AI in Development.
+            So much so that at the company I work for I'm now Senior Director of AI in Development.
           </p>
           <p>
-            This is where I share what I&apos;m reading, watching, and thinking
+            This space is where I share what I&apos;m reading, watching, and thinking
             about in the AI space. I consume a lot of content — articles,
             whitepapers, videos — and I log it all here with my notes. Sometimes
             I write longer pieces when an idea won&apos;t leave me alone.
