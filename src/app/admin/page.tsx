@@ -43,9 +43,14 @@ export default async function AdminDashboardPage({
         <h1 className="font-heading text-[28px] font-bold text-ink">
           Dashboard
         </h1>
-        <Link href="/admin/write">
-          <Button variant="primary">+ New Essay</Button>
-        </Link>
+        <div className="flex gap-2">
+          <Link href="/admin/tags">
+            <Button variant="ghost">Tags</Button>
+          </Link>
+          <Link href="/admin/write">
+            <Button variant="primary">+ New Essay</Button>
+          </Link>
+        </div>
       </div>
 
       <div className="flex gap-0 border-b border-edge mb-6">
