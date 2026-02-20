@@ -47,6 +47,9 @@ export default async function AdminDashboardPage({
           <Link href="/admin/tags">
             <Button variant="ghost">Tags</Button>
           </Link>
+          <Link href="/admin/export">
+            <Button variant="ghost">Export</Button>
+          </Link>
           <Link href="/admin/write">
             <Button variant="primary">+ New Essay</Button>
           </Link>
