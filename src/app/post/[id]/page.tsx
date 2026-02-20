@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import { stripHtml, calculateReadingTime } from "@/lib/utils";
 import EssayRenderer from "@/components/feed/EssayRenderer";
+import GiscusComments from "@/components/feed/GiscusComments";
 import TagPill from "@/components/ui/TagPill";
 
 type Params = Promise<{ id: string }>;
@@ -104,6 +105,8 @@ export default async function PostPage({ params }: { params: Params }) {
           ))}
         </div>
       )}
+
+      {post.type === "ESSAY" && <GiscusComments postId={id} />}
     </div>
   );
 }
