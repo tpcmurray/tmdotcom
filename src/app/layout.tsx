@@ -41,6 +41,19 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#8B4513" />
+        {/* RSS Auto-discovery */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Terry Murray — Essays (RSS)"
+          href="/feed/essays"
+        />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Terry Murray — Reading Log (RSS)"
+          href="/feed/log"
+        />
       </head>
       <body className="flex min-h-screen justify-center">
         <script
