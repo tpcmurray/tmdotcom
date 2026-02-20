@@ -68,6 +68,13 @@ export default async function PostPage({ params }: { params: Params }) {
 
   if (!post) notFound();
 
+  // Increment view count for published posts (fire-and-forget)
+  if (post.status === "PUBLISHED") {
+    prisma.post
+      .update({ where: { id }, data: { viewCount: { increment: 1 } } })
+      .catch(() => {});
+  }
+
   return (
     <div className="pt-12 pb-10 sm:pt-16 sm:pb-12">
       <Link

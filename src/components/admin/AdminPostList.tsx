@@ -11,6 +11,7 @@ interface AdminPost {
   status: string;
   domain: string | null;
   createdAt: string;
+  viewCount: number;
   tags: string[];
 }
 
@@ -84,6 +85,12 @@ export default function AdminPostList({ posts }: { posts: AdminPost[] }) {
                 <span>{typeLabel}</span>
                 <span>&middot;</span>
                 <span>{formatDate(post.createdAt)}</span>
+                {post.viewCount > 0 && (
+                  <>
+                    <span>&middot;</span>
+                    <span>{post.viewCount} {post.viewCount === 1 ? "view" : "views"}</span>
+                  </>
+                )}
                 {post.tags.length > 0 && (
                   <>
                     <span>&middot;</span>
