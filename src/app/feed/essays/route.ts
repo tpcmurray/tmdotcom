@@ -4,6 +4,15 @@ import { stripHtml } from "@/lib/utils";
 
 const SITE_URL = process.env.NEXTAUTH_URL || "https://terrymurray.com";
 
+function escapeXml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 function buildRssItem(post: {
   id: string;
   title: string;
@@ -29,8 +38,8 @@ function generateRssXml(title: string, description: string, items: ReturnType<ty
     .map(
       (item) => `    <item>
       <title><![CDATA[${item.title}]]></title>
-      <link>${item.link}</link>
-      <guid isPermaLink="true">${item.guid}</guid>
+      <link>${escapeXml(item.link)}</link>
+      <guid isPermaLink="true">${escapeXml(item.guid)}</guid>
       <pubDate>${item.pubDate}</pubDate>
       <description><![CDATA[${item.description}]]></description>
     </item>`
