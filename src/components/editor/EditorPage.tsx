@@ -200,7 +200,7 @@ export default function EditorPage({ initialData }: EditorPageProps) {
   }, []);
 
   return (
-    <div className="py-8">
+    <div className="page-content py-8">
       <SaveBar
         status={status}
         saveState={saveState}

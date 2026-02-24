@@ -77,7 +77,7 @@ export default async function PostPage({ params }: { params: Params }) {
   }
 
   return (
-    <div className="pt-12 pb-10 sm:pt-16 sm:pb-12">
+    <div className="page-content pt-12 pb-10 sm:pt-16 sm:pb-12">
       <Link
         href="/"
         className="font-meta text-[13px] text-ink-muted inline-block mb-8 hover:text-brown hover:no-underline"

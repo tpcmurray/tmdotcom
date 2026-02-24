@@ -22,7 +22,7 @@ export default async function AdminTagsPage() {
   }));
 
   return (
-    <div className="py-8">
+    <div className="page-content py-8">
       <div className="flex items-center justify-between mb-8">
         <h1 className="font-heading text-[28px] font-bold text-ink">
           Tags

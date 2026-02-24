@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="border-t border-edge-light">
-      <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6">
+      <div className="px-4 py-6 sm:px-8 text-center">
         <p className="font-meta text-sm text-ink-muted">
           &copy; {new Date().getFullYear()} Terry Murray
         </p>

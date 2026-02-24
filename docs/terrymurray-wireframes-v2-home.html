@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>terrymurray.com — Home Page Revision: Sidebar Bio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #F5F0E8;
+            --bg-secondary: #EDE7D9;
+            --bg-card: #FAF7F2;
+            --bg-page: #FDFCF9;
+            --text-primary: #3E2F1C;
+            --text-secondary: #6B5B4A;
+            --text-muted: #9A8B78;
+            --accent: #8B4513;
+            --accent-hover: #A0522D;
+            --border: #D4C9B8;
+            --border-light: #E5DDD0;
+            --tag-bg: #E8DFD0;
+            --tag-text: #5C4A35;
+            --shadow-soft: 0 2px 12px rgba(62, 47, 28, 0.06);
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Lora', serif;
+            --font-meta: 'Source Sans 3', sans-serif;
+            --radius: 4px;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            line-height: 1.7;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; transition: color 0.15s ease; }
+        a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        /* Wireframe chrome */
+        .wireframe-doc {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        .wireframe-doc-header {
+            text-align: center;
+            padding: 40px 0 32px;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 48px;
+        }
+        .wireframe-doc-header h1 {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+        .wireframe-doc-header p {
+            font-family: var(--font-meta);
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+        .wireframe-section {
+            margin-bottom: 72px;
+        }
+        .wireframe-section-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .wireframe-section-desc {
+            font-family: var(--font-meta);
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+        .wireframe-label {
+            display: inline-block;
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            background: var(--tag-bg);
+            padding: 3px 10px;
+            border-radius: 3px;
+            margin-bottom: 14px;
+        }
+        .wireframe-frame {
+            background: var(--bg-page);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+        }
+        .wireframe-frame.desktop { width: 100%; }
+        .wireframe-frame.mobile { width: 375px; }
+        .wireframe-frame-bar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .wireframe-frame-dot {
+            width: 10px; height: 10px; border-radius: 50%; background: var(--border);
+        }
+        .wireframe-frame-url {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: 12px;
+        }
+
+        /* ============================================
+           SITE HEADER
+           ============================================ */
+        .site-header {
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .site-title {
+            font-family: var(--font-heading);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .site-nav {
+            display: flex;
+            gap: 20px;
+            font-family: var(--font-meta);
+            font-size: 14px;
+        }
+        .site-nav a { color: var(--text-secondary); }
+
+        /* ============================================
+           SIDEBAR BIO LAYOUT
+           ============================================ */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 0;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        .feed-column {
+            padding: 0 32px 32px 0;
+            border-right: 1px solid var(--border-light);
+        }
+
+        .sidebar {
+            padding: 32px 0 32px 28px;
+            position: sticky;
+            top: 0;
+            align-self: start;
+        }
+
+        .sidebar-bio-name {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .sidebar-bio-text {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-bio-tagline {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .sidebar-section-label {
+            font-family: var(--font-meta);
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            margin-top: 24px;
+        }
+
+        .sidebar-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .sidebar-tag {
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.15s ease;
+        }
+
+        .sidebar-tag:hover { border-color: var(--border); }
+        .sidebar-tag.active { background: var(--accent); color: #FFF; }
+
+        /* ============================================
+           FILTER BAR (feed column only)
+           ============================================ */
+        .filter-bar {
+            padding: 16px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .filter-toggles {
+            display: flex;
+            gap: 4px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            padding: 3px;
+        }
+        .filter-toggle {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 5px 14px;
+            border-radius: 3px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+        .filter-toggle.active {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            box-shadow: 0 1px 3px rgba(62, 47, 28, 0.1);
+        }
+        .search-input {
+            margin-left: auto;
+            font-family: var(--font-meta);
+            font-size: 13px;
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            width: 180px;
+            outline: none;
+        }
+        .search-input::placeholder { color: var(--text-muted); }
+        .search-input:focus { border-color: var(--accent); }
+
+        /* ============================================
+           FEED ITEMS
+           ============================================ */
+        .feed-item {
+            padding: 22px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .feed-item:last-child { border-bottom: none; }
+        .feed-item-type {
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 5px;
+        }
+        .feed-item-type.log { color: var(--text-muted); }
+        .feed-item-type.essay { color: var(--accent); }
+        .feed-item-title {
+            font-family: var(--font-heading);
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        .feed-item-title a { color: inherit; }
+        .feed-item-title a:hover { color: var(--accent); text-decoration: none; }
+        .feed-item-meta {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .feed-item-domain { color: var(--accent); font-weight: 500; }
+        .feed-item-meta .separator { color: var(--border); }
+        .feed-item-notes {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        .feed-item-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+        .tag-pill {
+            font-family: var(--font-meta);
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--tag-bg);
+            color: var(--tag-text);
+        }
+        .feed-item-readmore {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        /* ============================================
+           MOBILE LAYOUT
+           ============================================ */
+        .mobile-layout {
+            padding: 0 16px;
+        }
+
+        .mobile-bio-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-light);
+            cursor: pointer;
+        }
+
+        .mobile-bio-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .mobile-bio-summary {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mobile-bio-name {
+            font-family: var(--font-heading);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .mobile-bio-role {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .mobile-bio-expand {
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .mobile-bio-expanded {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .mobile-bio-expanded-text {
+            font-family: var(--font-meta);
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .mobile-bio-expanded-tagline {
+            font-family: var(--font-body);
+            font-style: italic;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .mobile-filter-bar {
+            padding: 12px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .mobile-search-input {
+            font-family: var(--font-meta);
+            font-size: 14px;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            color: var(--text-primary);
+            width: 100%;
+            outline: none;
+        }
+        .mobile-search-input::placeholder { color: var(--text-muted); }
+
+        .mobile-feed-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .mobile-feed-item:last-child { border-bottom: none; }
+
+        .mobile .site-header {
+            padding: 14px 16px;
+        }
+        .mobile .site-title { font-size: 18px; }
+        .mobile .site-nav { gap: 14px; font-size: 13px; }
+
+        .site-footer {
+            padding: 20px 32px;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            font-family: var(--font-meta);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="wireframe-doc">
+
+    <div class="wireframe-doc-header">
+        <h1>terrymurray.com — Revised Home</h1>
+        <p>Bio moved to sticky sidebar (desktop) and collapsible bar (mobile). Feed is the star.</p>
+    </div>
+
+    <!-- ============================================
+         DESKTOP: Sidebar Bio Layout
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">Desktop — Sidebar Bio</h2>
+        <p class="wireframe-section-desc">Bio lives in a sticky right sidebar. It's always there if someone needs context, but the feed dominates. Tags also move to the sidebar since they're a navigation element, not primary content. Filter toggles and search stay above the feed.</p>
+
+        <span class="wireframe-label">Desktop</span>
+        <div class="wireframe-frame desktop">
+            <div class="wireframe-frame-bar">
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <div class="wireframe-frame-dot"></div>
+                <span class="wireframe-frame-url">terrymurray.com</span>
+            </div>
+            <div>
+                <div class="site-header">
+                    <div class="site-title">Terry Murray</div>
+                    <nav class="site-nav">
+                        <a href="#">Home</a>
+                        <a href="#">About</a>
+                    </nav>
+                </div>
+
+                <div class="main-layout">
+                    <!-- Feed Column -->
+                    <div class="feed-column">
+                        <div class="filter-bar">
+                            <div class="filter-toggles">
+                                <button class="filter-toggle active">All</button>
+                                <button class="filter-toggle">Reading Log</button>
+                                <button class="filter-toggle">Essays</button>
+                            </div>
+                            <input type="text" class="search-input" placeholder="Search posts...">
+                        </div>
+
+                        <!-- Essay -->
+                        <div class="feed-item">
+                            <div class="feed-item-type essay">Essay</div>
+                            <h3 class="feed-item-title"><a href="#">Why Vibe Coding Will Eat Spec-Driven Development</a></h3>
+                            <div class="feed-item-meta">
+                                <span>February 14, 2026</span>
+                                <span class="separator">·</span>
+                                <span>6 min read</span>
+                            </div>
+                            <p class="feed-item-notes">The gap between "describe what you want" and "get working software" is collapsing faster than anyone predicted. Here's why I think spec-driven development is already on borrowed time...</p>
+                            <div class="feed-item-tags">
+                                <span class="tag-pill">vibe coding</span>
+                                <span class="tag-pill">software development</span>
+                            </div>
+                            <a href="#" class="feed-item-readmore">Read more →</a>
+                        </div>
+
+                        <!-- Log Entry -->
+                        <div class="feed-item">
+                            <div class="feed-item-type log">Reading Log</div>
+                            <h3 class="feed-item-title"><a href="#">Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</a></h3>
+                            <div class="feed-item-meta">
+                                <a href="#" class="feed-item-domain">anthropic.com ↗</a>
+                                <span class="separator">·</span>
+                                <span>February 12, 2026</span>
+                            </div>
+                            <p class="feed-item-notes">This is huge for interpretability. The golden gate bridge experiment alone is worth the read. Makes me wonder what this means for compliance/audit use cases in financial crime.</p>
+                            <div class="feed-item-tags">
+                                <span class="tag-pill">interpretability</span>
+                                <span class="tag-pill">anthropic</span>
+                            </div>
+                        </div>
+
+                        <!-- Log Entry (no notes) -->
+                        <div class="feed-item">
+                            <div class="feed-item-type log">Reading Log</div>
+                            <h3 class="feed-item-title"><a href="#">The AI-Powered Developer Workflow: From Copilot to Autopilot</a></h3>
+                            <div class="feed-item-meta">
+                                <a href="#" class="feed-item-domain">youtube.com ↗</a>
+                                <span class="separator">·</span>
+                                <span>February 11, 2026</span>
+                            </div>
+                            <div class="feed-item-tags">
+                                <span class="tag-pill">vibe coding</span>
+                                <span class="tag-pill">developer tools</span>
+                            </div>
+                        </div>
+
+                        <!-- Log Entry -->
+                        <div class="feed-item">
+                            <div class="feed-item-type log">Reading Log</div>
+                            <h3 class="feed-item-title"><a href="#">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</a></h3>
+                            <div class="feed-item-meta">
+                                <a href="#" class="feed-item-domain">arxiv.org ↗</a>
+                                <span class="separator">·</span>
+                                <span>February 10, 2026</span>
+                            </div>
+                            <p class="feed-item-notes">Important paper. The pure RL approach to reasoning without supervised fine-tuning is compelling. Worth comparing against Anthropic's approach.</p>
+                            <div class="feed-item-tags">
+                                <span class="tag-pill">benchmarks</span>
+                                <span class="tag-pill">reasoning</span>
+                                <span class="tag-pill">deepseek</span>
+                            </div>
+                        </div>
+
+                        <!-- Log Entry -->
+                        <div class="feed-item">
+                            <div class="feed-item-type log">Reading Log</div>
+                            <h3 class="feed-item-title"><a href="#">Building Effective Agents</a></h3>
+                            <div class="feed-item-meta">
+                                <a href="#" class="feed-item-domain">anthropic.com ↗</a>
+                                <span class="separator">·</span>
+                                <span>February 8, 2026</span>
+                            </div>
+                            <p class="feed-item-notes">Best practical guide I've seen on agent architecture. The "orchestrator-worker" pattern maps well to what we're building with Buildica. Bookmarking for the team.</p>
+                            <div class="feed-item-tags">
+                                <span class="tag-pill">agents</span>
+                                <span class="tag-pill">anthropic</span>
+                                <span class="tag-pill">architecture</span>
+                            </div>
+                        </div>
+
+                        <!-- Essay -->
+                        <div class="feed-item">
+                            <div class="feed-item-type essay">Essay</div>
+                            <h3 class="feed-item-title"><a href="#">Three Things I Got Wrong About AI Coding Assistants</a></h3>
+                            <div class="feed-item-meta">
+                                <span>February 5, 2026</span>
+                                <span class="separator">·</span>
+                                <span>4 min read</span>
+                            </div>
+                            <p class="feed-item-notes">A year ago I made some predictions about where AI coding tools would be by now. I was wrong about almost everything — but not in the direction you'd expect...</p>
+                            <div class="feed-item-tags">
+                                <span class="tag-pill">vibe coding</span>
+                                <span class="tag-pill">predictions</span>
+                            </div>
+                            <a href="#" class="feed-item-readmore">Read more →</a>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="sidebar">
+                        <div class="sidebar-bio-name">Terry Murray</div>
+                        <div class="sidebar-bio-text">
+                            Senior Director of AI at Verafin (Nasdaq). Building with LLMs since ChatGPT launched in November 2022.
+                        </div>
+                        <div class="sidebar-bio-text">
+                            What I'm reading, watching, and thinking about in AI. Sometimes I write longer pieces when an idea won't leave me alone.
+                        </div>
+                        <div class="sidebar-bio-tagline">
+                            If you work with me, this is the answer to "what should I be reading?"
+                        </div>
+
+                        <div class="sidebar-section-label">Topics</div>
+                        <div class="sidebar-tags">
+                            <span class="sidebar-tag">agents</span>
+                            <span class="sidebar-tag active">vibe coding</span>
+                            <span class="sidebar-tag">interpretability</span>
+                            <span class="sidebar-tag">benchmarks</span>
+                            <span class="sidebar-tag">regulation</span>
+                            <span class="sidebar-tag">reasoning</span>
+                            <span class="sidebar-tag">anthropic</span>
+                            <span class="sidebar-tag">developer tools</span>
+                            <span class="sidebar-tag">architecture</span>
+                            <span class="sidebar-tag">deepseek</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="site-footer">© 2026 Terry Murray</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MOBILE: Collapsible Bio Bar
+         ============================================ -->
+    <div class="wireframe-section">
+        <h2 class="wireframe-section-title">Mobile — Collapsible Bio Bar</h2>
+        <p class="wireframe-section-desc">On mobile, the sidebar collapses into a compact identity bar at the top — your name, role, and a tap-to-expand for the full bio. Tags scroll horizontally below the filter controls. The feed starts immediately.</p>
+
+        <div style="display: flex; gap: 32px; align-items: flex-start;">
+            <div>
+                <span class="wireframe-label">Collapsed (default)</span>
+                <div class="wireframe-frame mobile">
+                    <div class="wireframe-frame-bar">
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <span class="wireframe-frame-url">terrymurray.com</span>
+                    </div>
+                    <div class="mobile">
+                        <div class="site-header">
+                            <div class="site-title">Terry Murray</div>
+                            <nav class="site-nav">
+                                <a href="#">Home</a>
+                            </nav>
+                        </div>
+
+                        <div class="mobile-layout">
+                            <!-- Collapsed bio bar -->
+                            <div class="mobile-bio-bar">
+                                <div class="mobile-bio-avatar">TM</div>
+                                <div class="mobile-bio-summary">
+                                    <div class="mobile-bio-name">Terry Murray</div>
+                                    <div class="mobile-bio-role">Senior Director of AI · Verafin</div>
+                                </div>
+                                <div class="mobile-bio-expand">About ▾</div>
+                            </div>
+
+                            <!-- Filters -->
+                            <div class="mobile-filter-bar">
+                                <input type="text" class="mobile-search-input" placeholder="Search posts...">
+                                <div class="filter-toggles">
+                                    <button class="filter-toggle active">All</button>
+                                    <button class="filter-toggle">Log</button>
+                                    <button class="filter-toggle">Essays</button>
+                                </div>
+                                <div style="display: flex; gap: 5px; overflow-x: auto; width: 100%;">
+                                    <span class="sidebar-tag" style="white-space: nowrap;">agents</span>
+                                    <span class="sidebar-tag active" style="white-space: nowrap;">vibe coding</span>
+                                    <span class="sidebar-tag" style="white-space: nowrap;">interpretability</span>
+                                    <span class="sidebar-tag" style="white-space: nowrap;">benchmarks</span>
+                                    <span class="sidebar-tag" style="white-space: nowrap;">reasoning</span>
+                                </div>
+                            </div>
+
+                            <!-- Feed -->
+                            <div class="mobile-feed-item">
+                                <div class="feed-item-type essay">Essay</div>
+                                <h3 class="feed-item-title" style="font-size: 19px;"><a href="#">Why Vibe Coding Will Eat Spec-Driven Development</a></h3>
+                                <div class="feed-item-meta">
+                                    <span>Feb 14, 2026</span>
+                                    <span class="separator">·</span>
+                                    <span>6 min read</span>
+                                </div>
+                                <p class="feed-item-notes" style="font-size: 14px;">The gap between "describe what you want" and "get working software" is collapsing faster than anyone predicted...</p>
+                                <div class="feed-item-tags">
+                                    <span class="tag-pill">vibe coding</span>
+                                </div>
+                                <a href="#" class="feed-item-readmore">Read more →</a>
+                            </div>
+
+                            <div class="mobile-feed-item">
+                                <div class="feed-item-type log">Reading Log</div>
+                                <h3 class="feed-item-title" style="font-size: 19px;"><a href="#">Scaling Monosemanticity</a></h3>
+                                <div class="feed-item-meta">
+                                    <a href="#" class="feed-item-domain">anthropic.com ↗</a>
+                                    <span class="separator">·</span>
+                                    <span>Feb 12, 2026</span>
+                                </div>
+                                <p class="feed-item-notes" style="font-size: 14px;">This is huge for interpretability. The golden gate bridge experiment alone is worth the read...</p>
+                                <div class="feed-item-tags">
+                                    <span class="tag-pill">interpretability</span>
+                                </div>
+                            </div>
+
+                            <div class="mobile-feed-item">
+                                <div class="feed-item-type log">Reading Log</div>
+                                <h3 class="feed-item-title" style="font-size: 19px;"><a href="#">DeepSeek-R1: Incentivizing Reasoning</a></h3>
+                                <div class="feed-item-meta">
+                                    <a href="#" class="feed-item-domain">arxiv.org ↗</a>
+                                    <span class="separator">·</span>
+                                    <span>Feb 10, 2026</span>
+                                </div>
+                                <div class="feed-item-tags">
+                                    <span class="tag-pill">reasoning</span>
+                                    <span class="tag-pill">deepseek</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="site-footer" style="padding: 16px;">© 2026 Terry Murray</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <span class="wireframe-label">Expanded (tap "About")</span>
+                <div class="wireframe-frame mobile">
+                    <div class="wireframe-frame-bar">
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <div class="wireframe-frame-dot"></div>
+                        <span class="wireframe-frame-url">terrymurray.com</span>
+                    </div>
+                    <div class="mobile">
+                        <div class="site-header">
+                            <div class="site-title">Terry Murray</div>
+                            <nav class="site-nav">
+                                <a href="#">Home</a>
+                            </nav>
+                        </div>
+
+                        <div class="mobile-layout">
+                            <!-- Expanded bio bar -->
+                            <div class="mobile-bio-bar">
+                                <div class="mobile-bio-avatar">TM</div>
+                                <div class="mobile-bio-summary">
+                                    <div class="mobile-bio-name">Terry Murray</div>
+                                    <div class="mobile-bio-role">Senior Director of AI · Verafin</div>
+                                </div>
+                                <div class="mobile-bio-expand">About ▴</div>
+                            </div>
+
+                            <div class="mobile-bio-expanded">
+                                <div class="mobile-bio-expanded-text">
+                                    Building with LLMs since ChatGPT launched in November 2022, and I haven't shut up about them since.
+                                </div>
+                                <div class="mobile-bio-expanded-text">
+                                    What I'm reading, watching, and thinking about in AI. I log it all here with my notes. Sometimes I write longer pieces when an idea won't leave me alone.
+                                </div>
+                                <div class="mobile-bio-expanded-tagline">
+                                    If you work with me, this is the answer to "what should I be reading?"
+                                </div>
+                            </div>
+
+                            <!-- Filters -->
+                            <div class="mobile-filter-bar">
+                                <input type="text" class="mobile-search-input" placeholder="Search posts...">
+                                <div class="filter-toggles">
+                                    <button class="filter-toggle active">All</button>
+                                    <button class="filter-toggle">Log</button>
+                                    <button class="filter-toggle">Essays</button>
+                                </div>
+                                <div style="display: flex; gap: 5px; overflow-x: auto; width: 100%;">
+                                    <span class="sidebar-tag" style="white-space: nowrap;">agents</span>
+                                    <span class="sidebar-tag active" style="white-space: nowrap;">vibe coding</span>
+                                    <span class="sidebar-tag" style="white-space: nowrap;">interpretability</span>
+                                </div>
+                            </div>
+
+                            <!-- Feed -->
+                            <div class="mobile-feed-item">
+                                <div class="feed-item-type essay">Essay</div>
+                                <h3 class="feed-item-title" style="font-size: 19px;"><a href="#">Why Vibe Coding Will Eat Spec-Driven Development</a></h3>
+                                <div class="feed-item-meta">
+                                    <span>Feb 14, 2026</span>
+                                    <span class="separator">·</span>
+                                    <span>6 min read</span>
+                                </div>
+                                <p class="feed-item-notes" style="font-size: 14px;">The gap between "describe what you want" and "get working software" is collapsing faster than anyone predicted...</p>
+                                <a href="#" class="feed-item-readmore">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

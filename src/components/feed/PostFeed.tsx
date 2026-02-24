@@ -22,9 +22,13 @@ type FilterType = "all" | "LOG" | "ESSAY";
 
 const LIMIT = 20;
 
-export default function PostFeed() {
+interface PostFeedProps {
+  activeTag: string | null;
+  onTagChange: (tag: string | null) => void;
+}
+
+export default function PostFeed({ activeTag, onTagChange }: PostFeedProps) {
   const [type, setType] = useState<FilterType>("all");
-  const [tag, setTag] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [posts, setPosts] = useState<Post[]>([]);
@@ -43,7 +47,7 @@ export default function PostFeed() {
           limit: String(LIMIT),
         });
         if (type !== "all") params.set("type", type);
-        if (tag) params.set("tag", tag);
+        if (activeTag) params.set("tag", activeTag);
         if (search) params.set("search", search);
 
         const res = await fetch(`/api/posts?${params}`);
@@ -58,7 +62,7 @@ export default function PostFeed() {
         setLoading(false);
       }
     },
-    [type, tag, search],
+    [type, activeTag, search],
   );
 
   // Reset on filter change
@@ -69,7 +73,7 @@ export default function PostFeed() {
     }
     setPage(1);
     fetchPosts(1, false);
-  }, [type, tag, search, fetchPosts]);
+  }, [type, activeTag, search, fetchPosts]);
 
   // Append on Load More
   useEffect(() => {
@@ -88,12 +92,10 @@ export default function PostFeed() {
     <div>
       <FilterBar
         activeType={type}
-        activeTag={tag}
         onTypeChange={(t) => {
           setType(t);
-          setTag(null);
+          onTagChange(null);
         }}
-        onTagChange={setTag}
         onSearchChange={setSearch}
       />
 
