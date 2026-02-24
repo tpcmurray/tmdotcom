@@ -15,8 +15,7 @@ export default function Sidebar({ tags, activeTag, onTagChange }: SidebarProps) 
     <aside className="sidebar">
       <div className="sidebar-bio-name">Terry Murray</div>
       <div className="sidebar-bio-text">
-        Senior Director of AI at Verafin (Nasdaq). Building with LLMs since
-        ChatGPT launched in November 2022.
+        Building with LLMs since ChatGPT launched in November 2022.
       </div>
       <div className="sidebar-bio-text">
         What I&apos;m reading, watching, and thinking about in AI. Sometimes I

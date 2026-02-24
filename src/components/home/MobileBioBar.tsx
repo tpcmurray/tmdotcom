@@ -28,7 +28,6 @@ export default function MobileBioBar({
         <div className="mobile-bio-avatar">TM</div>
         <div className="mobile-bio-summary">
           <div className="mobile-bio-name">Terry Murray</div>
-          <div className="mobile-bio-role">Senior Director of AI · Verafin</div>
         </div>
         <div className="mobile-bio-expand">
           About {expanded ? "\u25B4" : "\u25BE"}
