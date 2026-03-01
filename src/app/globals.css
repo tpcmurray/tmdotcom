@@ -365,6 +365,11 @@ a:hover {
 .essay-body li {
   margin-bottom: 4px;
 }
+.essay-body li ul,
+.essay-body li ol {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
 .essay-body li p {
   margin-bottom: 0;
 }
@@ -527,6 +532,11 @@ a:hover {
 }
 
 .editor-body .tiptap li {
+  margin-bottom: 4px;
+}
+.editor-body .tiptap li ul,
+.editor-body .tiptap li ol {
+  margin-top: 4px;
   margin-bottom: 4px;
 }
 .editor-body .tiptap li p {
