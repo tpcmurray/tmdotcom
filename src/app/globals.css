@@ -349,14 +349,24 @@ a:hover {
   margin: 24px 0;
 }
 
-.essay-body ul,
-.essay-body ol {
+.essay-body ul {
+  list-style-type: disc;
   padding-left: 1.5em;
+  margin-top: -12px;
+  margin-bottom: 20px;
+}
+.essay-body ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-top: -12px;
   margin-bottom: 20px;
 }
 
 .essay-body li {
   margin-bottom: 4px;
+}
+.essay-body li p {
+  margin-bottom: 0;
 }
 
 .essay-body pre {
@@ -503,14 +513,24 @@ a:hover {
   margin: 24px 0;
 }
 
-.editor-body .tiptap ul,
-.editor-body .tiptap ol {
+.editor-body .tiptap ul {
+  list-style-type: disc;
   padding-left: 1.5em;
+  margin-top: -12px;
+  margin-bottom: 20px;
+}
+.editor-body .tiptap ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+  margin-top: -12px;
   margin-bottom: 20px;
 }
 
 .editor-body .tiptap li {
   margin-bottom: 4px;
+}
+.editor-body .tiptap li p {
+  margin-bottom: 0;
 }
 
 .editor-body .tiptap pre {
