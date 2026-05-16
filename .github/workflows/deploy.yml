@@ -1,0 +1,79 @@
+name: Deploy to Lightsail
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-tmdotcom
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npx prisma generate
+
+      - run: npm run build
+
+      - name: Verify build output
+        run: |
+          test -d .next || (echo "::error::.next directory missing after build" && exit 1)
+          test -f .next/BUILD_ID || (echo "::error::.next/BUILD_ID missing" && exit 1)
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          SSH_HOST: ${{ secrets.LIGHTSAIL_HOST }}
+          SSH_USER: ${{ secrets.LIGHTSAIL_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          cat >> ~/.ssh/config <<EOF
+          Host lightsail
+            HostName $SSH_HOST
+            User $SSH_USER
+            IdentityFile ~/.ssh/deploy_key
+            StrictHostKeyChecking accept-new
+            UserKnownHostsFile ~/.ssh/known_hosts
+          EOF
+
+      - name: Rsync to Lightsail
+        run: |
+          rsync -avz --delete \
+            --exclude='/.git/' \
+            --exclude='/.github/' \
+            --exclude='/node_modules/' \
+            --exclude='/uploads/' \
+            --exclude='/.env' \
+            --exclude='/.env.local' \
+            --exclude='/.next/cache/' \
+            ./ lightsail:/home/ubuntu/tmdotcom/
+
+      - name: Install, migrate, restart
+        run: |
+          ssh lightsail bash -se <<'EOF'
+          set -euo pipefail
+          cd /home/ubuntu/tmdotcom
+          npm ci --omit=dev
+          npx prisma migrate deploy
+          sudo systemctl restart terrymurray
+          # brief health check — fail the deploy if the service didn't come back up
+          sleep 3
+          systemctl is-active --quiet terrymurray || (sudo journalctl -u terrymurray -n 50 --no-pager; exit 1)
+          EOF
