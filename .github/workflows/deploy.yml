@@ -63,17 +63,19 @@ jobs:
             --exclude='/.env' \
             --exclude='/.env.local' \
             --exclude='/.next/cache/' \
-            ./ lightsail:/home/ubuntu/tmdotcom/
+            --exclude='/.claude/' \
+            ./ lightsail:/var/www/terrymurray/
 
       - name: Install, migrate, restart
         run: |
           ssh lightsail bash -se <<'EOF'
           set -euo pipefail
-          cd /home/ubuntu/tmdotcom
+          cd /var/www/terrymurray
           npm ci --omit=dev
           npx prisma migrate deploy
-          sudo systemctl restart terrymurray
-          # brief health check — fail the deploy if the service didn't come back up
+          pm2 restart terrymurray
+          # Health check — fail the deploy if the app doesn't respond on its port.
           sleep 3
-          systemctl is-active --quiet terrymurray || (sudo journalctl -u terrymurray -n 50 --no-pager; exit 1)
+          curl -fsS --max-time 10 http://localhost:3001/ > /dev/null \
+            || (pm2 logs terrymurray --lines 50 --nostream; exit 1)
           EOF
