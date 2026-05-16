@@ -16,6 +16,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    environment: main_tmdotcom_deploy
     steps:
       - uses: actions/checkout@v4
 
