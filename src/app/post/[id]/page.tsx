@@ -8,6 +8,8 @@ import EssayRenderer from "@/components/feed/EssayRenderer";
 import GiscusComments from "@/components/feed/GiscusComments";
 import TagPill from "@/components/ui/TagPill";
 
+export const dynamic = "force-dynamic";
+
 type Params = Promise<{ id: string }>;
 
 function formatDate(date: Date) {

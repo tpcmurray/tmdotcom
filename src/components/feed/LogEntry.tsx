@@ -1,3 +1,5 @@
+"use client";
+
 import TagPill from "@/components/ui/TagPill";
 import { stripHtml } from "@/lib/utils";
 import type { Post } from "@/components/feed/PostFeed";
@@ -17,6 +19,15 @@ interface LogEntryProps {
 export default function LogEntry({ post }: LogEntryProps) {
   const notes = post.content ? stripHtml(post.content) : null;
 
+  const recordView = () => {
+    if (typeof navigator !== "undefined" && "sendBeacon" in navigator) {
+      const body = new Blob([JSON.stringify({ id: post.id })], {
+        type: "application/json",
+      });
+      navigator.sendBeacon("/api/views", body);
+    }
+  };
+
   return (
     <article className="pb-6 mb-6 border-b border-edge/50 last:border-b-0 last:pb-0 last:mb-0">
       {/* Type label */}
@@ -30,6 +41,7 @@ export default function LogEntry({ post }: LogEntryProps) {
           href={post.url ?? "#"}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={recordView}
           className="text-ink hover:text-brown hover:no-underline"
         >
           {post.title}
@@ -44,6 +56,7 @@ export default function LogEntry({ post }: LogEntryProps) {
               href={post.url}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={recordView}
               className="text-brown font-medium hover:no-underline"
             >
               {post.domain} ↗
