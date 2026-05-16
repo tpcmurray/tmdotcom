@@ -73,6 +73,7 @@ jobs:
           set -euo pipefail
           cd /var/www/terrymurray
           npm ci --omit=dev
+          npx prisma generate
           npx prisma migrate deploy
           pm2 restart terrymurray
           # Health check — fail the deploy if the app doesn't respond on its port.
